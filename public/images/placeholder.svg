@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500" fill="none" role="img" aria-label="Temple placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f9ad55"/>
+      <stop offset="0.45" stop-color="#ee7b1e"/>
+      <stop offset="1" stop-color="#6e1a1b"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="34%" r="42%">
+      <stop offset="0" stop-color="#fff3d6" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#f9ad55" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#f9ad55" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#sky)"/>
+  <circle cx="600" cy="510" r="520" fill="url(#sun)"/>
+  <g fill="#3a0a0a" opacity="0.92">
+    <!-- central gopuram -->
+    <path d="M470 1500 V760 h260 V1500 Z"/>
+    <path d="M455 760 l145 -150 145 150 Z"/>
+    <path d="M480 640 l120 -120 120 120 Z"/>
+    <path d="M505 540 l95 -110 95 110 Z"/>
+    <rect x="585" y="372" width="30" height="70" rx="6"/>
+    <circle cx="600" cy="360" r="20"/>
+    <!-- side towers -->
+    <path d="M250 1500 V900 h150 V1500 Z"/>
+    <path d="M240 900 l85 -95 85 95 Z"/>
+    <path d="M800 1500 V900 h150 V1500 Z"/>
+    <path d="M790 900 l85 -95 85 95 Z"/>
+  </g>
+  <g fill="#271611" opacity="0.5">
+    <rect x="120" y="1320" width="960" height="180"/>
+  </g>
+</svg>

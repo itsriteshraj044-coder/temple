@@ -1,0 +1,210 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+   Sri Vakrathunda Vinayagar Temple — Design Tokens
+   Palette preserved from the temple identity: saffron, maroon, gold, cream.
+   ========================================================================== */
+@theme {
+  /* Maroon — sanctum depth */
+  --color-maroon-950: #240505;
+  --color-maroon-900: #3a0a0a;
+  --color-maroon-800: #531012;
+  --color-maroon-700: #6e1a1b;
+  --color-maroon-600: #8a2526;
+
+  /* Saffron — sacred flame */
+  --color-saffron-600: #d2651a;
+  --color-saffron-500: #ee7b1e;
+  --color-saffron-400: #f4922e;
+  --color-saffron-300: #f9ad55;
+
+  /* Gold — gilded leaf */
+  --color-gold-600: #b08530;
+  --color-gold-500: #c9a14a;
+  --color-gold-400: #e3c172;
+  --color-gold-300: #f0d79a;
+
+  /* Cream — sandstone & ghee */
+  --color-cream-50: #fdfaf3;
+  --color-cream-100: #f9f2e4;
+  --color-cream-200: #f1e6cf;
+  --color-cream-300: #e7d6b4;
+
+  /* Ink — grounding text */
+  --color-ink-900: #271611;
+  --color-ink-700: #4a342a;
+  --color-ink-500: #735b4f;
+
+  /* Ultra-wide breakpoints for 32" desktop / 2K / 4K monitors */
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 2560px;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --ease-temple: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-soft: 0 30px 60px -30px rgba(58, 10, 10, 0.45);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-cream-50);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-saffron-400);
+    color: var(--color-maroon-950);
+  }
+
+  /* Elegant focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-saffron-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-cream-100);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gold-500);
+    border-radius: 10px;
+    border: 2px solid var(--color-cream-100);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Editorial fluid headings */
+  .text-hero {
+    font-size: clamp(2.75rem, 9vw, 8.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  .text-display {
+    font-size: clamp(2rem, 5.5vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+
+  /* Gold gradient text */
+  .text-gilded {
+    background: linear-gradient(120deg, #f0d79a 0%, #c9a14a 45%, #e3c172 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Letter-spaced eyebrow label */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
+  /* Organic blob masks for editorial imagery */
+  .mask-arch {
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 100%, #000 99%, transparent 100%);
+    mask-image: radial-gradient(120% 100% at 50% 100%, #000 99%, transparent 100%);
+  }
+  .clip-arch {
+    clip-path: path(
+      'M0,160 C0,71.6 71.6,0 160,0 H240 C328.4,0 400,71.6 400,160 V520 H0 Z'
+    );
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Initial state for GSAP reveals — prevents flash before JS runs.
+     Disabled when motion is reduced. */
+  .reveal-init {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
