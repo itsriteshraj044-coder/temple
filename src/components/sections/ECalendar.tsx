@@ -67,7 +67,7 @@ export function ECalendar() {
     <div className="min-h-screen bg-cream-100">
       {/* Top bar — brand + back to home */}
       <header className="sticky top-0 z-40 border-b border-maroon-900/10 bg-cream-50/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-none items-center justify-between px-5 py-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+        <div className="mx-auto flex max-w-none items-center justify-between px-5 py-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
           <button
             type="button"
             onClick={goHome}
@@ -99,7 +99,7 @@ export function ECalendar() {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-none px-5 pb-10 pt-16 sm:px-8 sm:pt-20 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <section className="mx-auto max-w-none px-5 pb-10 pt-16 sm:px-8 sm:pt-20 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         <Reveal>
           <span className="eyebrow mb-5 inline-flex items-center gap-3 text-saffron-600">
             <span aria-hidden className="h-px w-8 bg-saffron-500/60" />
@@ -141,7 +141,7 @@ export function ECalendar() {
       </section>
 
       {/* Month groups */}
-      <section className="mx-auto max-w-none px-5 pb-24 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <section className="mx-auto max-w-none px-5 pb-24 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         {groups.map((group) => (
           <div key={group.label} className="mt-12 first:mt-4">
             <Reveal>
@@ -153,7 +153,7 @@ export function ECalendar() {
               </div>
             </Reveal>
 
-            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 5xl:grid-cols-5">
               {group.events.map((e, i) => (
                 <motion.button
                   type="button"

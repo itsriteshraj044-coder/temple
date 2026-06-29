@@ -20,8 +20,8 @@ export function Contact() {
         className="pointer-events-none absolute left-1/2 top-0 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
         style={{ background: 'radial-gradient(circle, rgba(238,123,30,0.3), transparent 65%)' }}
       />
-      <div className="relative mx-auto max-w-none px-5 py-28 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48 lg:py-40">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+      <div className="relative mx-auto max-w-none px-5 py-28 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32 lg:py-40">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <span className="eyebrow inline-flex items-center gap-3 text-gold-300">
               <span className="h-px w-8 bg-gold-300/60" />

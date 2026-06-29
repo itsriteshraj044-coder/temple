@@ -101,10 +101,13 @@ export function Events() {
         ॐ
       </motion.span>
 
-      <div className="relative mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <div className="relative mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading eyebrow={EVENTS.eyebrow} title={EVENTS.title} light />
           <div className="flex items-center gap-3">
+            <Button href="#/e-calendar" variant="solid" className="ring-1 ring-gold-400/40">
+              {EVENTS.calendarCta}
+            </Button>
             <button
               type="button"
               aria-label="Previous events"
@@ -143,7 +146,7 @@ export function Events() {
             1024: { slidesPerView: 3.1, spaceBetween: 28 },
             1440: { slidesPerView: 3.6, spaceBetween: 32 },
           }}
-          className="events-marquee !px-5 sm:!px-8 lg:!px-12 xl:!px-16 2xl:!px-24 3xl:!px-32 4xl:!px-48"
+          className="events-marquee !px-5 sm:!px-8 lg:!px-12 xl:!px-16 2xl:!px-20 3xl:!px-24 4xl:!px-28 5xl:!px-32"
         >
           {EVENTS.items.map((ev) => (
             <SwiperSlide key={`${ev.title}-${ev.start}`} className="!h-auto">
@@ -178,14 +181,6 @@ export function Events() {
         </Swiper>
        </div>
       </Reveal>
-
-      <div className="relative mx-auto mt-14 max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
-        <Reveal delay={0.1}>
-          <Button href="#/e-calendar" variant="solid" className="ring-1 ring-gold-400/40">
-            {EVENTS.calendarCta}
-          </Button>
-        </Reveal>
-      </div>
     </section>
   )
 }

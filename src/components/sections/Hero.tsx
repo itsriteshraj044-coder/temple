@@ -78,7 +78,7 @@ export function Hero() {
         Om Gam Ganapataye Namaha
       </span>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-none grid-cols-1 items-center gap-12 px-5 pb-20 pt-28 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48 lg:pb-24 lg:pt-28">
+      <div className="relative z-10 mx-auto grid w-full max-w-none grid-cols-1 items-center gap-12 px-5 pb-20 pt-28 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32 lg:pb-24 lg:pt-28">
         {/* ---------- Left: editorial text ---------- */}
         <div className="lg:col-span-6 xl:col-span-7">
           <span
@@ -90,18 +90,22 @@ export function Hero() {
           </span>
 
           <h1 className="mt-7 font-display text-maroon-900">
-            <span className="block overflow-hidden">
-              <span data-hero="line" className="block text-hero font-medium">
+            <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
+              <span data-hero="line" className="block text-hero font-medium" style={{ lineHeight: 1.05 }}>
                 Sri Vakrathunda
               </span>
             </span>
-            <span className="block overflow-hidden">
-              <span data-hero="line" className="block text-hero font-medium italic text-gilded">
+            <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
+              <span
+                data-hero="line"
+                className="block text-hero font-medium text-gilded"
+                style={{ lineHeight: 1.05, paddingBottom: '0.1em' }}
+              >
                 Vinayagar
               </span>
             </span>
-            <span className="block overflow-hidden">
-              <span data-hero="line" className="block text-hero font-medium">
+            <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
+              <span data-hero="line" className="block text-hero font-medium" style={{ lineHeight: 1.05 }}>
                 Temple
               </span>
             </span>
@@ -109,7 +113,7 @@ export function Hero() {
 
           <p
             data-hero="lead"
-            className="mt-8 max-w-md font-serif text-xl leading-relaxed text-ink-700 sm:text-2xl"
+            className="mt-8 max-w-md font-serif leading-relaxed text-ink-700 text-[clamp(1.4rem,1.25vw,2rem)] xl:max-w-lg 3xl:max-w-xl"
           >
             {SITE.tagline}. A living sanctuary of devotion, culture and community.
           </p>
@@ -156,7 +160,7 @@ export function Hero() {
         <div className="relative lg:col-span-6 xl:col-span-5">
           <div
             ref={media}
-            className="relative mx-auto grid aspect-square w-full max-w-[22rem] place-items-center sm:max-w-[28rem] lg:max-w-[30rem] 2xl:max-w-[34rem] 3xl:max-w-[40rem]"
+            className="relative mx-auto grid aspect-square w-full max-w-[22rem] place-items-center sm:max-w-[28rem] lg:mx-0 lg:max-w-[min(60vh,60rem)]"
           >
             {/* pulsing saffron halo */}
             <div

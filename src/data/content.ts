@@ -69,7 +69,7 @@ export const ABOUT = {
 
 export const HISTORY = {
   eyebrow: 'Our Story',
-  title: 'A granite shrine, raised by devotion',
+  title: 'A granite shrine,\nraised by devotion',
   paragraphs: [
     'What began as the heartfelt aspiration of a few families has grown into a vibrant spiritual home for thousands. Through years of seva and community giving, the sacred granite shrine of Sri Vakrathunda Vinayagar took shape.',
     'Hand-carved by traditional sthapathis and consecrated through ancient Agamic rites, the temple stands today as a testament to faith, perseverance and the enduring presence of Lord Ganesha and Lord Ayyappa among us.',
@@ -138,7 +138,7 @@ export interface EventItem {
   start: string
 }
 
-const ev = (path: string) => `/images/events/${path}.png`
+const ev = (path: string) => `/images/events/${path}.webp`
 
 export const EVENTS: {
   eyebrow: string

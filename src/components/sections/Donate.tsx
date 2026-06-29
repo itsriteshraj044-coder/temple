@@ -20,7 +20,7 @@ export function Donate() {
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-maroon-950 to-transparent" />
       <div aria-hidden className="grain absolute inset-0" />
 
-      <div className="relative z-10 mx-auto w-full max-w-none px-5 py-28 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <div className="relative z-10 mx-auto w-full max-w-none px-5 py-28 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         <div className="max-w-2xl">
           <span className="eyebrow inline-flex items-center gap-3 text-gold-300">
             <span className="h-px w-8 bg-gold-300/60" />

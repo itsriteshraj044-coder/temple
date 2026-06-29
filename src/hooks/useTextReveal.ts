@@ -23,7 +23,7 @@ export function useTextReveal<T extends HTMLElement = HTMLHeadingElement>(
       .map((w) =>
         /\s+/.test(w)
           ? w
-          : `<span class="reveal-word" style="display:inline-block;overflow:hidden;vertical-align:top"><span style="display:inline-block">${w}</span></span>`,
+          : `<span class="reveal-word" style="display:inline-block;overflow:hidden;vertical-align:top;padding:0.18em 0;margin:-0.18em 0"><span style="display:inline-block">${w}</span></span>`,
       )
       .join('')
 

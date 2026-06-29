@@ -37,7 +37,7 @@ export function Navbar() {
             : 'bg-transparent py-5'
         }`}
       >
-        <nav className="mx-auto flex max-w-none items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+        <nav className="mx-auto flex max-w-none items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
           {/* Brand */}
           <a
             href="#home"
@@ -49,7 +49,7 @@ export function Navbar() {
             aria-label={`${SITE.name} — home`}
           >
             <img
-              src="/images/logo.png"
+              src="/images/svvt-emblem.webp"
               alt={`${SITE.name} emblem`}
               className="h-12 w-12 shrink-0 object-contain"
             />

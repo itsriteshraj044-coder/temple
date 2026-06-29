@@ -11,7 +11,7 @@ export function Canteen() {
 
   return (
     <section id="canteen" className="relative bg-cream-50 py-24 sm:py-32 lg:py-40">
-      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-12 xl:gap-16 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         {/* Image */}
         <div className="relative">
           <div className="group relative aspect-[5/4] w-full overflow-hidden rounded-[2.5rem] shadow-soft">
