@@ -86,7 +86,7 @@ export function Hero() {
             className="eyebrow inline-flex items-center gap-3 text-saffron-600"
           >
             <span className="h-px w-10 bg-saffron-500/60" />
-            The Basin · Victoria 3154
+            Established in Victoria 1992
           </span>
 
           <h1 className="mt-7 font-display text-maroon-900">
