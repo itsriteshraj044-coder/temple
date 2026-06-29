@@ -15,6 +15,7 @@ const spans = [
   'sm:col-span-1 sm:row-span-1',
   'sm:col-span-1 sm:row-span-1',
   'sm:col-span-1 sm:row-span-1',
+  'sm:col-span-1 sm:row-span-1',
 ]
 
 const pad = (n: number) => String(n).padStart(2, '0')

@@ -38,8 +38,21 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
 /** Smoothly scroll to an in-page anchor, falling back to native behaviour. */
 export function scrollToHash(hash: string) {
+  // Route hashes (e.g. '#/e-calendar') belong to the hash router, not in-page scroll.
+  if (hash.startsWith('#/')) {
+    window.location.hash = hash.slice(1)
+    return
+  }
   const el = document.querySelector(hash)
-  if (!el) return
+  if (!el) {
+    // The target section isn't on this page (e.g. we're on the E-Calendar route).
+    // Navigate back to the homepage, then scroll to it once it has mounted.
+    if (window.location.hash) {
+      window.location.hash = ''
+      setTimeout(() => scrollToHash(hash), 80)
+    }
+    return
+  }
   const lenis = (window as Window & { __lenis?: Lenis }).__lenis
   if (lenis) lenis.scrollTo(el as HTMLElement, { offset: -80 })
   else el.scrollIntoView({ behavior: 'smooth' })

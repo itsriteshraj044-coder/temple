@@ -194,6 +194,11 @@
   }
 }
 
+/* Continuous, even-paced marquee for the auto-looping events carousel. */
+.events-marquee .swiper-wrapper {
+  transition-timing-function: linear;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

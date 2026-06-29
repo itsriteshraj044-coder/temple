@@ -4,27 +4,6 @@ import { HiBars3, HiXMark, HiChevronDown } from 'react-icons/hi2'
 import { NAV, SITE } from '@/data/content'
 import { scrollToHash } from '@/providers/SmoothScroll'
 
-function OmMark({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" className={className} fill="none" aria-hidden>
-      <path
-        d="M20 26c0-5 4-8 9-8 4 0 7 2 8 5-2 1-3 2-3 4 0 3 2 5 5 5 4 0 7-3 7-8 0-7-6-12-15-12-8 0-15 5-16 13"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16 40c0 8 7 14 16 14 7 0 13-4 15-10"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <circle cx="44" cy="18" r="2.5" fill="currentColor" />
-      <path d="M40 13c2-2 6-2 8 0" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  )
-}
-
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -69,11 +48,11 @@ export function Navbar() {
             className="group flex items-center gap-3"
             aria-label={`${SITE.name} — home`}
           >
-            <span
-              className="grid h-11 w-11 place-items-center rounded-full bg-maroon-900 text-gold-400 transition-colors duration-500"
-            >
-              <OmMark className="h-6 w-6" />
-            </span>
+            <img
+              src="/images/logo.png"
+              alt={`${SITE.name} emblem`}
+              className="h-12 w-12 shrink-0 object-contain"
+            />
             <span className="leading-tight">
               <span className="block font-display text-[0.95rem] font-semibold text-maroon-900 transition-colors duration-500">
                 Sri Vakrathunda Vinayagar

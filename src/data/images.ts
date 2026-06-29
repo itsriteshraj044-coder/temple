@@ -55,6 +55,7 @@ export const IMAGES = {
         { src: '/images/web/mahotsavam/02.jpg', alt: 'Children offering aarti during Mahotsavam' },
         { src: '/images/web/mahotsavam/01.jpg', alt: 'A thavil drummer performing in the temple hall' },
         { src: '/images/web/mahotsavam/04.jpg', alt: 'The utsava murti adorned with flowers on the festival vahanam' },
+        { src: '/images/web/mahotsavam/03.jpg', alt: 'Priests performing the sacred flag-hoisting rite to open the festival' },
       ],
     },
     {
@@ -67,6 +68,7 @@ export const IMAGES = {
         { src: '/images/web/bhavahostam/03.jpg', alt: 'Devotees at darshan before the decorated golden sanctum' },
         { src: '/images/web/bhavahostam/05.jpg', alt: 'A young devotee reciting prayers during the festival' },
         { src: '/images/web/bhavahostam/07.jpg', alt: 'Nadaswaram and thavil musicians leading the procession' },
+        { src: '/images/web/bhavahostam/02.jpg', alt: 'The garlanded stone murti of Lord Murugan honoured during the festival' },
       ],
     },
     {
@@ -79,6 +81,7 @@ export const IMAGES = {
         { src: '/images/web/shasti/02.jpg', alt: 'The garlanded golden murti of Lord Murugan at Shasti' },
         { src: '/images/web/shasti/07.jpg', alt: 'Fruits and offerings arranged for the Shasti pooja' },
         { src: '/images/web/shasti/01.jpg', alt: 'Devotees gathered in the hall for the Shasti observance' },
+        { src: '/images/web/shasti/08.jpg', alt: 'A priest performing pooja at the golden sanctum during Shasti' },
       ],
     },
   ],

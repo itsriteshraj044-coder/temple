@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { SmoothScroll } from '@/providers/SmoothScroll'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
 import { Navbar } from '@/components/layout/Navbar'
@@ -13,26 +14,44 @@ import { Donate } from '@/components/sections/Donate'
 import { Join } from '@/components/sections/Join'
 import { Gallery } from '@/components/sections/Gallery'
 import { Contact } from '@/components/sections/Contact'
+import { ECalendar } from '@/components/sections/ECalendar'
+import { useRoute } from '@/lib/router'
+import type Lenis from 'lenis'
 
 export default function App() {
+  const route = useRoute()
+
+  // Reset to the top of the page whenever the route changes.
+  useEffect(() => {
+    const lenis = (window as Window & { __lenis?: Lenis }).__lenis
+    if (lenis) lenis.scrollTo(0, { immediate: true })
+    else window.scrollTo(0, 0)
+  }, [route])
+
   return (
     <SmoothScroll>
       <ScrollProgress />
-      <Navbar />
-      <main id="top">
-        <Hero />
-        <About />
-        <History />
-        <Services />
-        <Canteen />
-        <Events />
-        <Timings />
-        <Donate />
-        <Join />
-        <Gallery />
-        <Contact />
-      </main>
-      <Footer />
+      {route === 'e-calendar' ? (
+        <ECalendar />
+      ) : (
+        <>
+          <Navbar />
+          <main id="top">
+            <Hero />
+            <About />
+            <History />
+            <Services />
+            <Canteen />
+            <Events />
+            <Timings />
+            <Donate />
+            <Join />
+            <Gallery />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      )}
     </SmoothScroll>
   )
 }

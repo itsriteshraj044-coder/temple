@@ -9,6 +9,8 @@ interface ImgProps {
   /** subtle hover zoom */
   zoom?: boolean
   priority?: boolean
+  /** object-fit mode — defaults to cover */
+  fit?: 'cover' | 'contain'
   style?: CSSProperties
 }
 
@@ -24,6 +26,7 @@ export function Img({
   imgClassName = '',
   zoom = false,
   priority = false,
+  fit = 'cover',
   style,
 }: ImgProps) {
   const [loaded, setLoaded] = useState(false)
@@ -47,7 +50,7 @@ export function Img({
           if (!failed) setFailed(true)
           setLoaded(true)
         }}
-        className={`h-full w-full object-cover transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`h-full w-full ${fit === 'contain' ? 'object-contain' : 'object-cover'} transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           loaded ? 'opacity-100' : 'opacity-0'
         } ${zoom ? 'group-hover:scale-[1.06]' : ''} ${imgClassName}`}
       />

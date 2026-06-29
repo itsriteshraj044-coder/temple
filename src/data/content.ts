@@ -49,7 +49,7 @@ export const NAV: NavItem[] = [
   { label: 'Services', href: '#services' },
   { label: "Sri Ganesha's Canteen", href: '#canteen' },
   { label: 'Events', href: '#events' },
-  { label: 'E-Calendar', href: '#events' },
+  { label: 'E-Calendar', href: '#/e-calendar' },
   { label: 'How to Donate', href: '#donate' },
   { label: 'Join Us', href: '#join' },
   { label: 'Contacts', href: '#contact' },
@@ -128,19 +128,47 @@ export const CANTEEN = {
 
 export interface EventItem {
   title: string
+  /** Human-readable date shown on the card. */
   date: string
-  meta: string
+  /** Short category label — also drives the E-Calendar filters. */
+  category: string
+  /** Event poster image (sourced from the temple's official listings). */
+  img: string
+  /** ISO start date (yyyy-mm-dd) used for ordering and month grouping. */
+  start: string
 }
 
-export const EVENTS: { eyebrow: string; title: string; items: EventItem[] } = {
+const ev = (path: string) => `/images/events/${path}.png`
+
+export const EVENTS: {
+  eyebrow: string
+  title: string
+  intro: string
+  calendarCta: string
+  items: EventItem[]
+} = {
   eyebrow: 'Upcoming Events',
   title: 'Festivals & sacred observances',
+  intro:
+    'The temple calendar turns with the sacred rhythm of the year — abishegams, utsavams, homams and observances. All devotees are warmly welcome to join.',
+  calendarCta: 'View Full E-Calendar',
   items: [
-    { title: 'Lalitha Sahasranam', date: '16 – 25 June', meta: 'Recitation' },
-    { title: 'Aani Sangadahara Chathurthi', date: '3 July', meta: 'Observance' },
-    { title: 'Monthly Nagar Abishegam', date: '5 July', meta: 'Abishegam' },
-    { title: 'Chathurthi Utsavam', date: '17 July', meta: 'Utsavam' },
-    { title: 'Hanuman Homam', date: '18 July', meta: 'Homam' },
+    { title: 'Lalitha Sahasranam', date: '16 – 25 June 2026', category: 'Recitation', img: ev('lalitha-sahasranam'), start: '2026-06-16' },
+    { title: 'Sani Pradosham', date: '27 June 2026', category: 'Pradosham', img: ev('pradosham'), start: '2026-06-27' },
+    { title: 'Aani Pournami Utsavam', date: '29 June 2026', category: 'Utsavam', img: ev('aani-karthikai-utsavam'), start: '2026-06-29' },
+    { title: 'Aani Sangadahara Chathurthi', date: '3 July 2026', category: 'Chathurthi', img: ev('aani-sangadahara-chathurthi'), start: '2026-07-03' },
+    { title: 'Monthly Nagar Abishegam', date: '5 July 2026', category: 'Abishegam', img: ev('monthly-nagar-abishegam'), start: '2026-07-05' },
+    { title: 'Aani Thei Pirai Ashtami', date: '7 July 2026', category: 'Observance', img: ev('aani-thei-pirai-ashtami'), start: '2026-07-07' },
+    { title: 'Aani Karthikai Utsavam', date: '10 July 2026', category: 'Utsavam', img: ev('aani-karthikai-utsavam'), start: '2026-07-10' },
+    { title: 'Pradosham', date: '12 July 2026', category: 'Pradosham', img: ev('pradosham'), start: '2026-07-12' },
+    { title: 'Chathurthi Utsavam', date: '17 July 2026', category: 'Utsavam', img: ev('chathurthi-utsavam'), start: '2026-07-17' },
+    { title: 'Hanuman Homam', date: '18 July 2026', category: 'Homam', img: ev('hanuman-homam'), start: '2026-07-18' },
+    { title: 'Aadi Gayathri Ambal Abhishekam & Shukla Shasti', date: '19 July 2026', category: 'Abishegam', img: ev('aadi-gayathri-shukla-shasti'), start: '2026-07-19' },
+    { title: 'Aadi Chevvai 1', date: '21 July 2026', category: 'Observance', img: ev('aadi-chevvai'), start: '2026-07-21' },
+    { title: 'Suntharar Guru Pooja', date: '22 July 2026', category: 'Pooja', img: ev('suntharar-guru-pooja'), start: '2026-07-22' },
+    { title: 'Pradosham', date: '27 July 2026', category: 'Pradosham', img: ev('pradosham'), start: '2026-07-27' },
+    { title: 'Aadi Chevvai', date: '28 July 2026', category: 'Observance', img: ev('aadi-chevvai'), start: '2026-07-28' },
+    { title: 'Aadi Pournami Utsavam', date: '29 July 2026', category: 'Utsavam', img: ev('aani-karthikai-utsavam'), start: '2026-07-29' },
   ],
 }
 

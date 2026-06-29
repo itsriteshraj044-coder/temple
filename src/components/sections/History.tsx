@@ -1,7 +1,9 @@
+import { HiArrowLongRight } from 'react-icons/hi2'
 import { useParallax } from '@/hooks/useParallax'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
+import { scrollToHash } from '@/providers/SmoothScroll'
 import { HISTORY } from '@/data/content'
 import { IMAGES } from '@/data/images'
 
@@ -22,8 +24,8 @@ export function History() {
         style={{ background: 'radial-gradient(circle, rgba(238,123,30,0.25), transparent 65%)' }}
       />
 
-      <div className="relative mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 py-28 sm:px-8 lg:grid-cols-2 lg:gap-24 lg:py-44 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
-        <div className="order-2 lg:order-1">
+      <div className="relative mx-auto grid max-w-none grid-cols-1 items-stretch gap-10 px-5 py-28 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:py-40 lg:px-12 xl:gap-16 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+        <div className="order-2 flex flex-col justify-center lg:order-1">
           <SectionHeading eyebrow={HISTORY.eyebrow} title={HISTORY.title} light />
           <div className="mt-8 space-y-6">
             {HISTORY.paragraphs.map((p, i) => (
@@ -34,7 +36,7 @@ export function History() {
           </div>
 
           {/* timeline accents */}
-          <div className="mt-12 flex flex-wrap gap-x-12 gap-y-6">
+          <div className="mt-10 flex flex-wrap gap-x-12 gap-y-6">
             {['Aspiration', 'Seva', 'Granite Shrine', 'Consecration'].map((step, i) => (
               <Reveal key={step} delay={0.15 + i * 0.08}>
                 <div className="flex items-center gap-3">
@@ -46,10 +48,31 @@ export function History() {
               </Reveal>
             ))}
           </div>
+
+          {/* animated Read More button */}
+          <Reveal delay={0.3}>
+            <a
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault()
+                scrollToHash('#about')
+              }}
+              className="group relative mt-12 inline-flex items-center gap-3 self-start overflow-hidden rounded-full border border-gold-400/50 px-7 py-3.5 text-sm font-medium tracking-wide text-gold-300 transition-colors duration-300 hover:text-maroon-950"
+            >
+              <span
+                aria-hidden
+                className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gradient-to-r from-gold-300 to-saffron-400 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+              />
+              <span className="relative z-10 flex items-center gap-3">
+                Read More
+                <HiArrowLongRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+              </span>
+            </a>
+          </Reveal>
         </div>
 
         <div className="order-1 lg:order-2">
-          <div className="group relative ml-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2rem]">
+          <div className="group relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] sm:aspect-[16/11] lg:h-full lg:aspect-auto lg:min-h-[34rem]">
             <div ref={imgRef} className="absolute inset-0 scale-110">
               <Img src={IMAGES.history} alt={IMAGES.historyAlt} zoom className="h-full w-full" />
             </div>

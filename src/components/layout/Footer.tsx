@@ -21,7 +21,14 @@ export function Footer() {
         {/* Top: wordmark + back to top */}
         <div className="flex flex-col gap-8 border-b border-cream-50/12 pb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <span className="eyebrow text-gold-300">The Basin · Victoria</span>
+            <div className="mb-6 flex items-center gap-4">
+              <img
+                src="/images/logo.png"
+                alt={`${SITE.name} emblem`}
+                className="h-16 w-16 shrink-0 object-contain [filter:brightness(0)_invert(1)]"
+              />
+              <span className="eyebrow text-gold-300">The Basin · Victoria</span>
+            </div>
             <h2 className="mt-4 max-w-2xl font-display text-4xl leading-tight text-cream-50 sm:text-5xl lg:text-6xl">
               Sri Vakrathunda <span className="text-gilded italic">Vinayagar</span> Temple
             </h2>
