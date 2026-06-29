@@ -208,7 +208,7 @@
   /* Letter-spaced eyebrow label */
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.95rem;
     font-weight: 500;
     letter-spacing: 0.32em;
     text-transform: uppercase;
