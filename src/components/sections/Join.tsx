@@ -27,7 +27,7 @@ export function Join() {
   return (
     <section id="join" className="relative bg-cream-50 py-24 sm:py-32 lg:py-40">
       <span id="community" className="absolute -top-24" aria-hidden />
-      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12 xl:gap-16 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         <div className="lg:col-span-6">
           <SectionHeading eyebrow={JOIN.eyebrow} title={JOIN.title} />
           <Reveal delay={0.1}>

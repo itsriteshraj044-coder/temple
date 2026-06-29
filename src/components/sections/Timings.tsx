@@ -6,12 +6,8 @@ import { TIMINGS } from '@/data/content'
 export function Timings() {
   return (
     <section id="timings" className="relative bg-cream-100 py-24 sm:py-32 lg:py-40">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-maroon-900/10 to-transparent lg:left-1/2"
-      />
-      <div className="mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+      <div className="mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
           <div className="lg:col-span-5">
             <SectionHeading eyebrow={TIMINGS.eyebrow} title={TIMINGS.title} />
             <Reveal delay={0.1}>

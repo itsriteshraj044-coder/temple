@@ -12,7 +12,7 @@ export function About() {
 
   return (
     <section id="about" className="relative overflow-hidden bg-cream-50 py-24 sm:py-32 lg:py-40">
-      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48">
+      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12 xl:gap-16 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
         {/* Image — arch silhouette mask */}
         <div className="lg:col-span-5 lg:order-1">
           {/* anchor box: the seal lives inside this (sized to the image), so it
@@ -65,12 +65,12 @@ export function About() {
         <div className="lg:col-span-7 lg:order-2">
           <SectionHeading eyebrow={ABOUT.eyebrow} title={ABOUT.title} />
           <Reveal delay={0.1}>
-            <p className="mt-8 max-w-2xl font-serif text-2xl leading-relaxed text-maroon-800 sm:text-3xl">
+            <p className="mt-8 font-serif text-2xl leading-relaxed text-maroon-800 sm:text-3xl">
               {ABOUT.lead}
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-ink-700">
+            <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-700">
               {ABOUT.body}
             </p>
           </Reveal>

@@ -1,6 +1,52 @@
 @import 'tailwindcss';
 
 /* ============================================================================
+   Web fonts — self-hosted Noto Sans (used site-wide).
+   ========================================================================== */
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/noto-sans-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/noto-sans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/noto-sans-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/noto-sans-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/noto-sans-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/noto-sans-800.woff2') format('woff2');
+}
+
+/* ============================================================================
    Sri Vakrathunda Vinayagar Temple — Design Tokens
    Palette preserved from the temple identity: saffron, maroon, gold, cream.
    ========================================================================== */
@@ -35,13 +81,17 @@
   --color-ink-700: #4a342a;
   --color-ink-500: #735b4f;
 
-  /* Ultra-wide breakpoints for 32" desktop / 2K / 4K monitors */
+  /* Ultra-wide breakpoints for 32" desktop / 2K / 4K monitors.
+     3xl → 1080p ultra-wide, 4xl → 2K / 1440p (common 32" QHD),
+     5xl → true 4K / 32" UHD panels. */
   --breakpoint-3xl: 1920px;
   --breakpoint-4xl: 2560px;
+  --breakpoint-5xl: 3840px;
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Noto Sans site-wide — headings, titles, and body text all use it. */
+  --font-display: 'Noto Sans', -apple-system, system-ui, sans-serif;
+  --font-serif: 'Noto Sans', -apple-system, system-ui, sans-serif;
+  --font-sans: 'Noto Sans', -apple-system, system-ui, sans-serif;
 
   --ease-temple: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -79,7 +129,9 @@
     background-color: var(--color-cream-50);
     color: var(--color-ink-900);
     font-family: var(--font-sans);
-    font-synthesis: none;
+    /* Noto Sans ships no italic cut in these files, so allow synthetic obliquing
+       for the few italic accents; real weights mean faux-bold stays off. */
+    font-synthesis: style;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

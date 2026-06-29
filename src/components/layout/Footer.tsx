@@ -17,30 +17,39 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-maroon-900 text-cream-100">
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-400/40 to-transparent" />
 
-      <div className="mx-auto max-w-none px-5 pb-12 pt-20 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 3xl:px-32 4xl:px-48 lg:pt-28">
+      <div className="mx-auto max-w-none px-5 pb-12 pt-20 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32 lg:pt-28">
         {/* Top: wordmark + back to top */}
         <div className="flex flex-col gap-8 border-b border-cream-50/12 pb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <div className="mb-6 flex items-center gap-4">
               <img
-                src="/images/logo.png"
+                src="/images/svvt-emblem.webp"
                 alt={`${SITE.name} emblem`}
                 className="h-16 w-16 shrink-0 object-contain [filter:brightness(0)_invert(1)]"
               />
               <span className="eyebrow text-gold-300">The Basin · Victoria</span>
             </div>
             <h2 className="mt-4 max-w-2xl font-display text-4xl leading-tight text-cream-50 sm:text-5xl lg:text-6xl">
-              Sri Vakrathunda <span className="text-gilded italic">Vinayagar</span> Temple
+              Sri Vakrathunda <span className="text-gilded">Vinayagar</span> Temple
             </h2>
           </div>
-          <button
-            type="button"
-            onClick={() => scrollToHash('#home')}
-            className="group inline-flex items-center gap-3 self-start rounded-full border border-cream-50/25 px-5 py-3 text-sm transition-colors hover:border-gold-400 hover:text-gold-300 lg:self-auto"
-          >
-            Back to top
-            <HiArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
-          </button>
+          <div className="flex flex-col items-start gap-2 lg:items-end">
+            {/* large faint Om shadow above the button */}
+            <span
+              aria-hidden
+              className="pointer-events-none -mb-4 select-none font-display leading-none text-gold-400/10 text-[8rem] sm:text-[10rem]"
+            >
+              ॐ
+            </span>
+            <button
+              type="button"
+              onClick={() => scrollToHash('#home')}
+              className="group inline-flex items-center gap-3 rounded-full border border-cream-50/25 px-5 py-3 text-sm transition-colors hover:border-gold-400 hover:text-gold-300"
+            >
+              Back to top
+              <HiArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
+            </button>
+          </div>
         </div>
 
         {/* Middle: nav + contact */}
@@ -85,9 +94,10 @@ export function Footer() {
         {/* Bottom: socials + copyright */}
         <div className="flex flex-col-reverse items-start justify-between gap-6 border-t border-cream-50/12 pt-8 sm:flex-row sm:items-center">
           <p className="text-xs text-cream-100/50">
-            © {year} {SITE.copyright}. All rights reserved. · Made with devotion.
+            © {year} {SITE.copyright}. All rights reserved.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div className="flex items-center gap-3">
             {socials.map((s) => (
               <a
                 key={s.label}
@@ -100,6 +110,18 @@ export function Footer() {
                 <s.icon className="h-4 w-4" />
               </a>
             ))}
+            </div>
+            <p className="text-xs text-cream-100/50">
+              Developed by{' '}
+              <a
+                href="https://egdigital.com.au/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-gold-300 transition-colors hover:text-saffron-400"
+              >
+                EG Digital
+              </a>
+            </p>
           </div>
         </div>
       </div>
