@@ -251,6 +251,26 @@
   transition-timing-function: linear;
 }
 
+/* ----------------------------------------------------------------------------
+   125% display-scaling band.
+   A 1920px monitor at Windows 125% scaling reports a ~1536px CSS viewport
+   (150% → ~1280px). In that range the editorial type felt oversized, so we
+   trim the big headings and labels down a notch. The full-size 1920px+ design
+   is untouched. These rules are unlayered, so they override @layer utilities.
+   ------------------------------------------------------------------------- */
+@media (min-width: 1200px) and (max-width: 1650px) {
+  .text-hero {
+    font-size: clamp(2.5rem, 6.5vw, 6rem);
+  }
+  .text-display {
+    font-size: clamp(1.85rem, 4.2vw, 3.5rem);
+  }
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.26em;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -33,8 +33,8 @@ export function Navbar() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-cream-50/85 py-3 shadow-[0_10px_40px_-24px_rgba(58,10,10,0.5)] backdrop-blur-xl'
-            : 'bg-transparent py-5'
+            ? 'bg-cream-50/85 py-1.5 shadow-[0_10px_40px_-24px_rgba(58,10,10,0.5)] backdrop-blur-xl'
+            : 'bg-transparent py-3'
         }`}
       >
         <nav className="mx-auto flex max-w-none items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
@@ -51,7 +51,7 @@ export function Navbar() {
             <img
               src="/images/svvt-emblem.webp"
               alt={`${SITE.name} emblem`}
-              className="h-12 w-12 shrink-0 object-contain"
+              className="h-20 w-20 shrink-0 object-contain"
             />
             <span className="leading-tight">
               <span className="block font-display text-[0.95rem] font-semibold text-maroon-900 transition-colors duration-500">
