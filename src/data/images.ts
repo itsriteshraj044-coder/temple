@@ -49,7 +49,7 @@ export const IMAGES = {
       title: 'Mahotsavam 2025',
       blurb: 'The grand annual festival — processions, music and devotion in full bloom.',
       photos: [
-        { src: '/images/web/mahotsavam/06.webp', alt: 'The deity carried in procession on the shoulders of devotees' },
+        { src: '/images/web/mahotsavam/06.webp', alt: 'Priests offering deepa aarti to the adorned utsava murti during Mahotsavam' },
         { src: '/images/web/mahotsavam/05.webp', alt: 'Young boys sounding the sacred conch (shanku)' },
         { src: '/images/web/mahotsavam/02.webp', alt: 'Children offering aarti during Mahotsavam' },
         { src: '/images/web/mahotsavam/01.webp', alt: 'A thavil drummer performing in the temple hall' },
