@@ -130,10 +130,10 @@ export function BackgroundMusic() {
             {/* Golden seam that flares as the doors part */}
             <motion.div
               aria-hidden
-              initial={{ opacity: 0.5, scaleY: 1 }}
-              exit={{ opacity: [0.5, 1, 0], scaleX: [1, 2.4, 1] }}
+              initial={{ opacity: 0, scaleX: 1 }}
+              exit={{ opacity: [0, 1, 0], scaleX: [1, 2.4, 1] }}
               transition={{ duration: 0.9, ease: 'easeOut' }}
-              className="absolute inset-y-0 left-1/2 z-10 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-gold-300/70 to-transparent"
+              className="pointer-events-none absolute inset-y-0 left-1/2 z-10 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-gold-300/70 to-transparent"
             />
 
             {/* Centered content — fades out as the doors open */}
