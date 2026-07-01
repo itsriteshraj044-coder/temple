@@ -12,16 +12,9 @@ import { useEffect, useRef } from 'react'
  */
 const SRC = '/audio/temple-music.mp3'
 const VOLUME = 0.05 // very soft, background level
-const EVENTS = [
-  'pointerdown',
-  'keydown',
-  'touchstart',
-  'touchend',
-  'click',
-  'wheel',
-  'scroll',
-  'mousemove',
-] as const
+// Per the browser autoplay policy, only genuine "user activation" events can
+// unmute — scroll / wheel / mousemove do NOT count, so they are excluded.
+const EVENTS = ['pointerdown', 'keydown', 'touchstart', 'touchend', 'click'] as const
 
 export function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
