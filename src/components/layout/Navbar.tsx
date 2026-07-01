@@ -31,13 +31,17 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-all duration-500 ${
           scrolled
-            ? 'bg-cream-50/85 py-1.5 shadow-[0_10px_40px_-24px_rgba(58,10,10,0.5)] backdrop-blur-xl'
-            : 'bg-transparent py-3'
+            ? 'bg-cream-50/85 shadow-[0_10px_40px_-24px_rgba(58,10,10,0.5)] backdrop-blur-xl'
+            : 'bg-transparent'
         }`}
       >
-        <nav className="mx-auto flex max-w-none items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+        <nav
+          className={`shell flex items-center justify-between ${
+            scrolled ? 'py-1.5' : 'py-3'
+          }`}
+        >
           {/* Brand */}
           <a
             href="#home"
@@ -45,26 +49,26 @@ export function Navbar() {
               e.preventDefault()
               go('#home')
             }}
-            className="group flex items-center gap-3"
+            className="group flex shrink-0 items-center gap-2.5 xl:gap-3"
             aria-label={`${SITE.name} — home`}
           >
             <img
               src="/images/svvt-emblem.webp"
               alt={`${SITE.name} emblem`}
-              className="h-20 w-20 shrink-0 object-contain"
+              className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16 2xl:h-20 2xl:w-20"
             />
             <span className="leading-tight">
-              <span className="block font-display text-[0.95rem] font-semibold text-maroon-900 transition-colors duration-500">
+              <span className="block whitespace-nowrap font-display text-[0.8rem] font-semibold text-maroon-900 transition-colors duration-500 sm:text-[0.95rem] xl:text-[0.85rem] 2xl:text-[0.95rem]">
                 Sri Vakrathunda Vinayagar
               </span>
-              <span className="block text-[0.62rem] tracking-[0.28em] text-saffron-600 uppercase transition-colors duration-500">
+              <span className="block text-[0.56rem] tracking-[0.24em] text-saffron-600 uppercase transition-colors duration-500 sm:text-[0.62rem] sm:tracking-[0.28em] xl:text-[0.58rem] 2xl:text-[0.62rem]">
                 Temple · The Basin
               </span>
             </span>
           </a>
 
           {/* Desktop nav */}
-          <ul className="hidden items-center gap-1 xl:flex">
+          <ul className="hidden items-center gap-0 xl:flex 2xl:gap-1">
             {NAV.map((item) => (
               <li
                 key={item.label}
@@ -78,7 +82,7 @@ export function Navbar() {
                     e.preventDefault()
                     go(item.href)
                   }}
-                  className="flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.82rem] font-medium text-ink-700 transition-colors duration-300 hover:text-maroon-900"
+                  className="flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-[0.74rem] font-medium text-ink-700 transition-colors duration-300 hover:text-maroon-900 2xl:px-3.5 2xl:text-[0.82rem]"
                 >
                   {item.label}
                   {item.children && <HiChevronDown className="h-3.5 w-3.5 opacity-70" />}
@@ -122,7 +126,7 @@ export function Navbar() {
                 e.preventDefault()
                 go('#donate')
               }}
-              className="hidden rounded-full bg-saffron-500 px-5 py-2.5 text-[0.82rem] font-medium text-maroon-950 transition-all duration-300 hover:bg-saffron-400 hover:shadow-[0_12px_30px_-10px_rgba(238,123,30,0.7)] md:inline-block"
+              className="hidden rounded-full bg-saffron-500 px-4 py-2 text-[0.78rem] font-medium text-maroon-950 transition-all duration-300 hover:bg-saffron-400 hover:shadow-[0_12px_30px_-10px_rgba(238,123,30,0.7)] md:inline-block 2xl:px-5 2xl:py-2.5 2xl:text-[0.82rem]"
             >
               Donate
             </a>
@@ -151,7 +155,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 overflow-y-auto bg-maroon-950 px-6 pb-12 pt-28 xl:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-maroon-950 pl-[max(1.5rem,env(safe-area-inset-left))] pr-[max(1.5rem,env(safe-area-inset-right))] pt-[calc(7rem+env(safe-area-inset-top))] pb-[calc(3rem+env(safe-area-inset-bottom))] xl:hidden"
           >
             <ul className="mx-auto flex max-w-md flex-col gap-1">
               {NAV.map((item, i) => (

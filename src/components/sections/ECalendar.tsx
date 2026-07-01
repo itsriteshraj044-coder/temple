@@ -66,8 +66,8 @@ export function ECalendar() {
   return (
     <div className="min-h-screen bg-cream-100">
       {/* Top bar — brand + back to home */}
-      <header className="sticky top-0 z-40 border-b border-maroon-900/10 bg-cream-50/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-none items-center justify-between px-5 py-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <header className="sticky top-0 z-40 border-b border-maroon-900/10 bg-cream-50/85 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
+        <div className="shell flex items-center justify-between gap-3 py-4">
           <button
             type="button"
             onClick={goHome}
@@ -78,10 +78,10 @@ export function ECalendar() {
               ॐ
             </span>
             <span className="leading-tight">
-              <span className="block font-display text-[0.95rem] font-semibold text-maroon-900">
+              <span className="block font-display text-[0.8rem] font-semibold text-maroon-900 sm:text-[0.95rem]">
                 Sri Vakrathunda Vinayagar
               </span>
-              <span className="block text-[0.62rem] uppercase tracking-[0.28em] text-saffron-600">
+              <span className="block text-[0.56rem] uppercase tracking-[0.24em] text-saffron-600 sm:text-[0.62rem] sm:tracking-[0.28em]">
                 Temple · The Basin
               </span>
             </span>
@@ -90,16 +90,17 @@ export function ECalendar() {
           <button
             type="button"
             onClick={goHome}
-            className="group inline-flex items-center gap-2 rounded-full border border-maroon-900/30 px-5 py-2.5 text-sm font-medium tracking-wide text-maroon-900 transition-colors hover:border-maroon-900/60 hover:bg-maroon-900 hover:text-cream-50"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-maroon-900/30 px-3.5 py-2.5 text-sm font-medium tracking-wide text-maroon-900 transition-colors hover:border-maroon-900/60 hover:bg-maroon-900 hover:text-cream-50 sm:px-5"
+            aria-label="Back to Home"
           >
             <HiArrowLongLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
-            Back to Home
+            <span className="hidden sm:inline">Back to Home</span>
           </button>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-none px-5 pb-10 pt-16 sm:px-8 sm:pt-20 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <section className="shell pb-10 pt-16 sm:pt-20">
         <Reveal>
           <span className="eyebrow mb-5 inline-flex items-center gap-3 text-saffron-600">
             <span aria-hidden className="h-px w-8 bg-saffron-500/60" />
@@ -141,7 +142,7 @@ export function ECalendar() {
       </section>
 
       {/* Month groups */}
-      <section className="mx-auto max-w-none px-5 pb-24 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <section className="shell pb-24">
         {groups.map((group) => (
           <div key={group.label} className="mt-12 first:mt-4">
             <Reveal>

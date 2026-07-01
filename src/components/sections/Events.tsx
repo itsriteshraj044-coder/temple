@@ -101,7 +101,7 @@ export function Events() {
         ॐ
       </motion.span>
 
-      <div className="relative mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <div className="relative shell">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading eyebrow={EVENTS.eyebrow} title={EVENTS.title} light />
           <div className="flex items-center gap-3">

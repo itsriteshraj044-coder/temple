@@ -75,10 +75,10 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute left-5 top-1/2 hidden -translate-y-1/2 -rotate-180 text-[0.62rem] tracking-[0.5em] text-maroon-900/40 uppercase [writing-mode:vertical-rl] xl:block"
       >
-        Om Gam Ganapataye Namaha
+        Om Gan Ganapataye Namaha
       </span>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-none grid-cols-1 items-center gap-12 px-5 pb-20 pt-28 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32 lg:pb-24 lg:pt-28">
+      <div className="relative z-10 shell grid grid-cols-1 items-center gap-6 pb-20 pt-28 sm:gap-8 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-28">
         {/* ---------- Left: editorial text ---------- */}
         <div className="lg:col-span-6 xl:col-span-7">
           <span
@@ -134,7 +134,7 @@ export function Hero() {
           {/* meta row */}
           <div
             data-hero="meta"
-            className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-maroon-900/10 pt-6"
+            className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 border-t border-maroon-900/10 pt-6 text-center lg:justify-start lg:text-left"
           >
             <div>
               <div className="text-[0.62rem] tracking-[0.25em] text-ink-500 uppercase">
@@ -142,7 +142,7 @@ export function Hero() {
               </div>
               <div className="mt-1 font-serif text-lg text-maroon-900">Darshan &amp; Abishegam</div>
             </div>
-            <div className="h-8 w-px bg-maroon-900/10" />
+            <div className="hidden h-8 w-px bg-maroon-900/10 lg:block" />
             <a
               href={SITE.phoneHref}
               className="group transition-colors"
@@ -204,7 +204,7 @@ export function Hero() {
         href="#about"
         data-hero="scroll"
         aria-label="Scroll to explore"
-        className="group absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-maroon-900/70"
+        className="group absolute bottom-[calc(1.75rem+env(safe-area-inset-bottom))] left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-maroon-900/70 lg:flex"
         onClick={(e) => {
           e.preventDefault()
           document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })

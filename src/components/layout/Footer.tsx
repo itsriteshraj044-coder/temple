@@ -17,7 +17,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-maroon-900 text-cream-100">
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-400/40 to-transparent" />
 
-      <div className="mx-auto max-w-none px-5 pb-12 pt-20 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32 lg:pt-28">
+      <div className="shell pb-[calc(3rem+env(safe-area-inset-bottom))] pt-20 lg:pt-28">
         {/* Top: wordmark + back to top */}
         <div className="flex flex-col gap-8 border-b border-cream-50/12 pb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -25,7 +25,7 @@ export function Footer() {
               <img
                 src="/images/svvt-emblem.webp"
                 alt={`${SITE.name} emblem`}
-                className="h-20 w-20 shrink-0 object-contain [filter:brightness(0)_invert(1)]"
+                className="h-16 w-16 shrink-0 object-contain [filter:brightness(0)_invert(1)] sm:h-20 sm:w-20"
               />
               <span className="eyebrow text-gold-300">The Basin · Victoria</span>
             </div>

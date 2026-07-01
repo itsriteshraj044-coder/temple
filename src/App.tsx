@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { SmoothScroll } from '@/providers/SmoothScroll'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
+import { BackgroundMusic } from '@/components/ui/BackgroundMusic'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
@@ -31,6 +32,7 @@ export default function App() {
   return (
     <SmoothScroll>
       <ScrollProgress />
+      <BackgroundMusic />
       {route === 'e-calendar' ? (
         <ECalendar />
       ) : (

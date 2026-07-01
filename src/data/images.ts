@@ -37,8 +37,8 @@ export const IMAGES = {
   canteen: '/images/web/shasti/07.webp',
   canteenAlt: 'Fruits and prasadam offerings arranged for devotees',
 
-  donate: '/images/web/shasti/03.webp',
-  donateAlt: 'Rows of sacred lamps glowing during deeparadhana',
+  donate: '/images/web/donate.webp',
+  donateAlt: 'Devotees carrying the golden festival murti of Lord Vinayagar in procession before the granite gopuram',
 
   join: '/images/community-family.webp',
   joinAlt: 'Trustees and members of the temple community gathered together',
