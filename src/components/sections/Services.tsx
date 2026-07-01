@@ -12,7 +12,7 @@ import { SERVICES } from '@/data/content'
  */
 const MEDIA = [
   { src: '/images/web/services/pooja.webp', alt: 'Temple priests offering aarti during pooja at the golden Vinayagar sanctum' },
-  { src: '/images/web/services/wedding.webp', alt: 'Nadaswaram and thavil musicians performing the auspicious temple music traditionally played at weddings and ceremonies' },
+  { src: '/images/web/services/wedding.webp', alt: 'Temple priests conducting traditional Agamic ceremonial rites before gathered devotees' },
   { src: '/images/web/services/yearly.webp', alt: 'Brass oil lamps glowing during deeparadhana' },
   { src: '/images/web/services/community.webp', alt: 'Devotees gathered together in the temple hall' },
 ]
