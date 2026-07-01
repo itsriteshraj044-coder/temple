@@ -195,7 +195,7 @@ export function BackgroundMusic() {
           aria-label={playing ? 'Mute temple music' : 'Play temple music'}
           aria-pressed={playing}
           title={playing ? 'Mute temple music' : 'Play temple music'}
-          className="group fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-50 grid h-11 w-11 place-items-center rounded-full border border-maroon-900/15 bg-cream-50/90 text-maroon-900 shadow-[0_10px_30px_-12px_rgba(58,10,10,0.5)] backdrop-blur-md transition-colors duration-300 hover:border-gold-400 hover:text-saffron-600"
+          className="group fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-50 grid h-12 w-12 place-items-center rounded-full border border-gold-400/40 bg-maroon-900 text-gold-300 shadow-[0_12px_30px_-8px_rgba(58,10,10,0.65)] backdrop-blur-md transition-colors duration-300 hover:bg-maroon-800 hover:text-gold-200"
         >
           {playing ? (
             <HiMiniSpeakerWave className="h-5 w-5" />
