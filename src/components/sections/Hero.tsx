@@ -78,9 +78,9 @@ export function Hero() {
         Om Gan Ganapataye Namaha
       </span>
 
-      <div className="relative z-10 shell grid grid-cols-1 items-center gap-6 pb-20 pt-28 sm:gap-8 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-28">
+      <div className="hero-grid relative z-10 shell grid grid-cols-1 items-center gap-6 pb-20 pt-28 sm:gap-8 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-28">
         {/* ---------- Left: editorial text ---------- */}
-        <div className="lg:col-span-6 xl:col-span-7">
+        <div className="hero-col-text lg:col-span-6 xl:col-span-7">
           <span
             data-hero="eyebrow"
             className="eyebrow inline-flex items-center gap-3 text-saffron-600"
@@ -91,21 +91,21 @@ export function Hero() {
 
           <h1 className="mt-7 font-display text-maroon-900">
             <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
-              <span data-hero="line" className="block text-hero font-medium" style={{ lineHeight: 1.05 }}>
+              <span data-hero="line" className="block whitespace-nowrap text-hero font-medium" style={{ lineHeight: 1.05 }}>
                 Sri Vakrathunda
               </span>
             </span>
             <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
               <span
                 data-hero="line"
-                className="block text-hero font-medium text-gilded"
+                className="block whitespace-nowrap text-hero font-medium text-gilded"
                 style={{ lineHeight: 1.05, paddingBottom: '0.1em' }}
               >
                 Vinayagar
               </span>
             </span>
             <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
-              <span data-hero="line" className="block text-hero font-medium" style={{ lineHeight: 1.05 }}>
+              <span data-hero="line" className="block whitespace-nowrap text-hero font-medium" style={{ lineHeight: 1.05 }}>
                 Temple
               </span>
             </span>
@@ -157,7 +157,7 @@ export function Hero() {
         </div>
 
         {/* ---------- Right: Ayyappa murti over a rotating Chakara ---------- */}
-        <div className="relative lg:col-span-6 xl:col-span-5">
+        <div className="relative hero-col-media lg:col-span-6 xl:col-span-5">
           <div
             ref={media}
             className="relative mx-auto grid aspect-square w-full max-w-[22rem] place-items-center sm:max-w-[28rem] lg:mx-0 lg:max-w-[min(60vh,60rem)]"
