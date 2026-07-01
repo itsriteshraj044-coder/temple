@@ -289,39 +289,42 @@
     padding-inline: max(1.25rem, env(safe-area-inset-left))
       max(1.25rem, env(safe-area-inset-right));
   }
+  /* Each step falls back to its fixed rem when JS is off, but the zoom-lock
+     script (index.html) overrides --shell-pad with the ZOOM-NORMALISED step so
+     gutters stay constant across 50%–200% zoom. */
   @media (min-width: 640px) {
     .shell {
-      padding-inline: 2rem;
+      padding-inline: var(--shell-pad, 2rem);
     }
   }
   @media (min-width: 1024px) {
     .shell {
-      padding-inline: 3rem;
+      padding-inline: var(--shell-pad, 3rem);
     }
   }
   @media (min-width: 1280px) {
     .shell {
-      padding-inline: 4rem;
+      padding-inline: var(--shell-pad, 4rem);
     }
   }
   @media (min-width: 1536px) {
     .shell {
-      padding-inline: 5rem;
+      padding-inline: var(--shell-pad, 5rem);
     }
   }
   @media (min-width: 1920px) {
     .shell {
-      padding-inline: 6rem;
+      padding-inline: var(--shell-pad, 6rem);
     }
   }
   @media (min-width: 2560px) {
     .shell {
-      padding-inline: 7rem;
+      padding-inline: var(--shell-pad, 7rem);
     }
   }
   @media (min-width: 3840px) {
     .shell {
-      padding-inline: 8rem;
+      padding-inline: var(--shell-pad, 8rem);
     }
   }
 }
@@ -332,23 +335,48 @@
 }
 
 /* ----------------------------------------------------------------------------
-   125% display-scaling band.
-   A 1920px monitor at Windows 125% scaling reports a ~1536px CSS viewport
-   (150% → ~1280px). In that range the editorial type felt oversized, so we
-   trim the big headings and labels down a notch. The full-size 1920px+ design
-   is untouched. These rules are unlayered, so they override @layer utilities.
+   Mid-width display type trim.
+   A 1920px monitor at Windows 125% scaling presents a ~1536px display, where
+   the editorial type felt oversized, so we trim the big headings and labels a
+   notch. The `type-trim` class is toggled from the zoom-lock script in
+   index.html using the ZOOM-NORMALISED width, so it keys off the real display
+   size and never flips on/off merely because the page is zoomed (50%–200%).
+   The full-size 1920px+ design is untouched. Unlayered, so these override
+   @layer utilities.
    ------------------------------------------------------------------------- */
-@media (min-width: 1200px) and (max-width: 1650px) {
-  .text-hero {
-    font-size: clamp(2.5rem, 6.5vw, 6rem);
-  }
-  .text-display {
-    font-size: clamp(1.85rem, 4.2vw, 3.5rem);
-  }
-  .eyebrow {
-    font-size: 0.8rem;
-    letter-spacing: 0.26em;
-  }
+html.type-trim .text-hero {
+  font-size: clamp(2.5rem, 6.5vw, 6rem);
+}
+html.type-trim .text-display {
+  font-size: clamp(1.85rem, 4.2vw, 3.5rem);
+}
+html.type-trim .eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.26em;
+}
+
+/* ----------------------------------------------------------------------------
+   Hero — zoom-stable layout.
+   The zoom-lock script (index.html) toggles `hero-2col` and sets the column
+   spans from the ZOOM-NORMALISED width, so the two-column editorial layout and
+   the headline column keep their 100% proportions at every zoom (50%–200%)
+   instead of reflowing when a raw breakpoint flips. Unlayered so these override
+   the Tailwind responsive utilities kept in the markup as a no-JS fallback.
+   ------------------------------------------------------------------------- */
+:root {
+  --hero-text-span: 7;
+  --hero-media-span: 5;
+}
+html.hero-2col .hero-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2.5rem;
+  align-items: center;
+}
+html.hero-2col .hero-col-text {
+  grid-column: span var(--hero-text-span) / span var(--hero-text-span);
+}
+html.hero-2col .hero-col-media {
+  grid-column: span var(--hero-media-span) / span var(--hero-media-span);
 }
 
 @media (prefers-reduced-motion: reduce) {

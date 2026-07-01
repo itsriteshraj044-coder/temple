@@ -5,6 +5,68 @@
     <link rel="icon" type="image/webp" href="/images/svvt-emblem.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#3A0A0A" />
+    <script>
+      /* ------------------------------------------------------------------
+         Zoom lock — keep every section looking exactly like it does at 100%
+         no matter the browser page-zoom (110 / 115 / 120 / 125 % …).
+
+         Page-zoom enlarges rem/px sizes, which made headings grow and wrap.
+         devicePixelRatio scales proportionally with page-zoom on every
+         desktop browser, so its ratio to the value at load isolates the zoom
+         factor (cancelling the OS / display scale). We shrink the root
+         font-size by that factor, so every rem-based size renders at its
+         100% dimensions. Plain window resizes don't change devicePixelRatio,
+         so normal responsive behaviour stays untouched — only zoom is
+         compensated. Runs before first paint, so there is no flash.
+         ------------------------------------------------------------------ */
+      (function () {
+        var baseDPR = window.devicePixelRatio || 1;
+        var root = document.documentElement;
+
+        /* Page gutter for a given (zoom-normalised) width — mirrors the .shell
+           step table in index.css so gutters stay constant under zoom. */
+        function shellPad(w) {
+          if (w >= 3840) return '8rem';
+          if (w >= 2560) return '7rem';
+          if (w >= 1920) return '6rem';
+          if (w >= 1536) return '5rem';
+          if (w >= 1280) return '4rem';
+          if (w >= 1024) return '3rem';
+          if (w >= 640) return '2rem';
+          return null; /* mobile → let the CSS base (safe-area) handle it */
+        }
+
+        function applyZoomLock() {
+          var zoom = (window.devicePixelRatio || 1) / baseDPR;
+          if (!isFinite(zoom) || zoom <= 0) zoom = 1;
+          /* Cover ~50%–200% (and a little beyond) with guard rails. */
+          zoom = Math.min(Math.max(zoom, 0.25), 4);
+          root.style.fontSize = (16 / zoom).toFixed(4) + 'px';
+
+          /* Zoom-normalised width = the viewport width as if at 100% zoom.
+             It stays constant per display no matter the zoom, so every
+             breakpoint decision below keys off the REAL display size and never
+             flips just because the page is zoomed. */
+          var w = window.innerWidth * zoom;
+
+          /* Mid-width heading trim. */
+          root.classList.toggle('type-trim', w >= 1200 && w <= 1650);
+
+          /* Keep page gutters constant under zoom. */
+          var pad = shellPad(w);
+          if (pad) root.style.setProperty('--shell-pad', pad);
+          else root.style.removeProperty('--shell-pad');
+
+          /* Hold the hero's two-column layout + column spans steady so the
+             headline never reflows or wraps merely because of zoom. */
+          root.classList.toggle('hero-2col', w >= 1024);
+          root.style.setProperty('--hero-text-span', w >= 1280 ? '7' : '6');
+          root.style.setProperty('--hero-media-span', w >= 1280 ? '5' : '6');
+        }
+        applyZoomLock();
+        window.addEventListener('resize', applyZoomLock, { passive: true });
+      })();
+    </script>
     <meta
       name="description"
       content="Sri Vakrathunda Vinayagar Temple, The Basin, Victoria — a sacred home of Lord Ganesha and Lord Ayyappa. Explore daily worship, services, events, and community."

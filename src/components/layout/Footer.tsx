@@ -91,6 +91,30 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Protected by badge — sits above the divider */}
+        <div className="flex justify-center pb-8 sm:justify-end">
+          <a
+            href="https://egdigital.com.au/"
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 rounded-full border border-cream-50/15 py-1.5 pl-1.5 pr-4 transition-colors hover:border-gold-400/60"
+          >
+            <img
+              src="/Shield%20Animation.gif"
+              alt="EG Digital security shield"
+              className="h-12 w-12 shrink-0 object-contain"
+            />
+            <span className="text-left leading-tight">
+              <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-cream-100/45">
+                Protected by
+              </span>
+              <span className="block text-xs font-medium text-gold-300 transition-colors group-hover:text-saffron-400">
+                EG Digital
+              </span>
+            </span>
+          </a>
+        </div>
+
         {/* Bottom: socials + copyright */}
         <div className="flex flex-col-reverse items-start justify-between gap-6 border-t border-cream-50/12 pt-8 sm:flex-row sm:items-center">
           <p className="text-xs text-cream-100/50">
