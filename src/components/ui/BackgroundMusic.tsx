@@ -4,22 +4,22 @@ import { HiMiniSpeakerWave, HiMiniSpeakerXMark } from 'react-icons/hi2'
 /**
  * Ambient temple music.
  *
- * Browsers block audible autoplay until the visitor interacts with the page,
- * so we can't legally make sound appear before any interaction. Instead we use
- * the standard pattern: start playing *muted* right away (muted autoplay is
- * always allowed), then unmute on the very first user gesture — a tap, click
- * or key press — so the music becomes audible the instant they touch the page,
- * with no lag and without needing to find a button. Nothing is persisted, so
- * it always starts again on refresh.
+ * Browsers (everywhere, including Vercel) block audible autoplay until the
+ * visitor interacts with the page — this is a fixed browser policy, not a
+ * hosting issue. So we start playback *muted* right away (always allowed) and
+ * unmute on the first user gesture — a tap, click or key press anywhere — so
+ * the music becomes audible the instant they touch the page. Nothing is
+ * persisted, so it always restarts on refresh.
  */
 const SRC = '/audio/temple-music.mp3'
 const VOLUME = 0.05 // very soft, background level
-// Only true "user activation" events can unmute per the browser autoplay
-// policy (scroll / wheel / mousemove do not count).
-const GESTURES = ['pointerdown', 'click', 'keydown', 'touchstart', 'touchend'] as const
+// Only genuine "user activation" events can unmute per the autoplay policy
+// (scroll / wheel / mousemove do not count).
+const GESTURES = ['pointerdown', 'keydown', 'touchstart', 'touchend'] as const
 
 export function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const btnRef = useRef<HTMLButtonElement | null>(null)
   const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
@@ -32,7 +32,12 @@ export function BackgroundMusic() {
     audio.play().catch(() => {})
 
     // 2) On the first real interaction, unmute so it becomes audible.
-    const enable = () => {
+    const enable = (e: Event) => {
+      // Clicks on the control button are handled by its own onClick — skip
+      // them here so we don't unmute-then-pause in the same click.
+      if (btnRef.current && e.target instanceof Node && btnRef.current.contains(e.target)) {
+        return
+      }
       audio.muted = false
       audio.volume = VOLUME
       audio
@@ -40,14 +45,14 @@ export function BackgroundMusic() {
         .then(() => {
           if (!audio.muted && !audio.paused) {
             setPlaying(true)
-            GESTURES.forEach((e) => window.removeEventListener(e, enable))
+            GESTURES.forEach((ev) => window.removeEventListener(ev, enable))
           }
         })
         .catch(() => {})
     }
-    GESTURES.forEach((e) => window.addEventListener(e, enable, { passive: true }))
+    GESTURES.forEach((ev) => window.addEventListener(ev, enable, { passive: true }))
 
-    return () => GESTURES.forEach((e) => window.removeEventListener(e, enable))
+    return () => GESTURES.forEach((ev) => window.removeEventListener(ev, enable))
   }, [])
 
   const toggle = () => {
@@ -71,6 +76,7 @@ export function BackgroundMusic() {
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={audioRef} src={SRC} loop preload="auto" />
       <button
+        ref={btnRef}
         type="button"
         onClick={toggle}
         aria-label={playing ? 'Mute temple music' : 'Play temple music'}
