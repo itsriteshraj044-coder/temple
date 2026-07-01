@@ -95,7 +95,7 @@ export function BackgroundMusic() {
               initial={{ x: 0 }}
               exit={{ x: '-101%' }}
               transition={{ duration: 1.15, ease: DOOR_EASE }}
-              className="absolute inset-y-0 left-0 w-1/2 border-r border-gold-400/40 bg-maroon-950 shadow-[24px_0_60px_-10px_rgba(0,0,0,0.6)]"
+              className="absolute inset-y-0 left-0 w-1/2 bg-maroon-950"
             >
               <div aria-hidden className="grain absolute inset-0" />
               <div
@@ -114,7 +114,7 @@ export function BackgroundMusic() {
               initial={{ x: 0 }}
               exit={{ x: '101%' }}
               transition={{ duration: 1.15, ease: DOOR_EASE }}
-              className="absolute inset-y-0 right-0 w-1/2 border-l border-gold-400/40 bg-maroon-950 shadow-[-24px_0_60px_-10px_rgba(0,0,0,0.6)]"
+              className="absolute inset-y-0 right-0 w-1/2 bg-maroon-950"
             >
               <div aria-hidden className="grain absolute inset-0" />
               <div
