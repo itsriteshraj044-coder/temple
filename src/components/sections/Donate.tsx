@@ -12,7 +12,7 @@ export function Donate() {
   const title = useTextReveal<HTMLHeadingElement>({ stagger: 0.05 })
 
   return (
-    <section id="donate" className="relative flex min-h-[80vh] items-center overflow-hidden bg-maroon-950 text-cream-50">
+    <section id="donate" className="relative flex min-h-[80svh] items-center overflow-hidden bg-maroon-950 text-cream-50">
       <div ref={bg} className="absolute inset-0 scale-110">
         <Img src={IMAGES.donate} alt={IMAGES.donateAlt} className="h-full w-full" imgClassName="object-center" />
       </div>
@@ -20,7 +20,7 @@ export function Donate() {
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-maroon-950 to-transparent" />
       <div aria-hidden className="grain absolute inset-0" />
 
-      <div className="relative z-10 mx-auto w-full max-w-none px-5 py-28 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <div className="relative z-10 shell py-28">
         <div className="max-w-2xl">
           <span className="eyebrow inline-flex items-center gap-3 text-gold-300">
             <span className="h-px w-8 bg-gold-300/60" />
@@ -30,7 +30,7 @@ export function Donate() {
             {DONATE.title}
           </h2>
           <Reveal delay={0.1}>
-            <p className="mt-7 max-w-xl font-serif text-xl leading-relaxed text-cream-100/85 sm:text-2xl">
+            <p className="text-lead mt-7 max-w-xl font-serif leading-relaxed text-cream-100/85">
               {DONATE.body}
             </p>
           </Reveal>

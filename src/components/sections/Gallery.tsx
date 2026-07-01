@@ -31,7 +31,7 @@ export function Gallery() {
 
   return (
     <section id="gallery" className="relative bg-cream-100 py-24 sm:py-32 lg:py-40">
-      <div className="mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <div className="shell">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading eyebrow={GALLERY.eyebrow} title={GALLERY.title} />
           <Reveal delay={0.1}>

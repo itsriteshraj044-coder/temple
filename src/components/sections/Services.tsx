@@ -11,10 +11,10 @@ import { SERVICES } from '@/data/content'
  * component (not in the text content) so the copy in `SERVICES` stays untouched.
  */
 const MEDIA = [
-  { src: '/images/web/bhavahostam/08.webp', alt: 'Priests performing abishegam at the golden Vinayagar shrine' },
-  { src: '/images/web/bhavahostam/07.webp', alt: 'Nadaswaram and thavil musicians leading a temple ceremony' },
-  { src: '/images/web/shasti/03.webp', alt: 'Rows of sacred lamps glowing during deeparadhana' },
-  { src: '/images/web/mahotsavam/02.webp', alt: 'Devotees and children offering aarti together' },
+  { src: '/images/web/services/pooja.webp', alt: 'Temple priests offering aarti during pooja at the golden Vinayagar sanctum' },
+  { src: '/images/web/services/wedding.webp', alt: 'Nadaswaram and thavil musicians performing the auspicious temple music traditionally played at weddings and ceremonies' },
+  { src: '/images/web/services/yearly.webp', alt: 'Brass oil lamps glowing during deeparadhana' },
+  { src: '/images/web/services/community.webp', alt: 'Devotees gathered together in the temple hall' },
 ]
 
 /**
@@ -39,7 +39,7 @@ export function Services() {
       />
       <div aria-hidden className="grain absolute inset-0" />
 
-      <div className="relative mx-auto max-w-none px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <div className="relative shell">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
           <SectionHeading
             eyebrow={SERVICES.eyebrow}

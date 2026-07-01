@@ -24,7 +24,7 @@ export function History() {
         style={{ background: 'radial-gradient(circle, rgba(238,123,30,0.25), transparent 65%)' }}
       />
 
-      <div className="relative mx-auto grid max-w-none grid-cols-1 items-stretch gap-10 px-5 py-28 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:py-40 lg:px-12 xl:gap-16 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <div className="relative shell grid grid-cols-1 items-stretch gap-10 py-28 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:py-40 xl:gap-16">
         <div className="order-2 flex flex-col justify-center lg:order-1">
           <SectionHeading
             eyebrow={HISTORY.eyebrow}

@@ -1,5 +1,4 @@
 import { HiOutlineUserGroup, HiOutlineHeart, HiArrowUpRight } from 'react-icons/hi2'
-import { useParallax } from '@/hooks/useParallax'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
@@ -7,8 +6,6 @@ import { JOIN } from '@/data/content'
 import { IMAGES } from '@/data/images'
 
 export function Join() {
-  const imgRef = useParallax<HTMLDivElement>(50)
-
   const cards = [
     {
       icon: HiOutlineUserGroup,
@@ -27,7 +24,7 @@ export function Join() {
   return (
     <section id="join" className="relative bg-cream-50 py-24 sm:py-32 lg:py-40">
       <span id="community" className="absolute -top-24" aria-hidden />
-      <div className="mx-auto grid max-w-none grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12 xl:gap-16 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-28 5xl:px-32">
+      <div className="shell grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
         <div className="lg:col-span-6">
           <SectionHeading eyebrow={JOIN.eyebrow} title={JOIN.title} />
           <Reveal delay={0.1}>
@@ -57,10 +54,8 @@ export function Join() {
         </div>
 
         <div className="lg:col-span-6">
-          <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] shadow-soft">
-            <div ref={imgRef} className="absolute inset-0 scale-110">
-              <Img src={IMAGES.join} alt={IMAGES.joinAlt} zoom className="h-full w-full" />
-            </div>
+          <div className="group relative aspect-[3/2] w-full overflow-hidden rounded-[2.5rem] shadow-soft">
+            <Img src={IMAGES.join} alt={IMAGES.joinAlt} zoom className="absolute inset-0 h-full w-full" />
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-maroon-950/40 to-transparent" />
           </div>
         </div>
