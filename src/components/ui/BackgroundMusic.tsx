@@ -113,8 +113,7 @@ export function BackgroundMusic() {
                 aria-hidden
                 className="h-24 w-24 object-contain opacity-95 [filter:brightness(0)_invert(1)] sm:h-28 sm:w-28"
               />
-              <span className="eyebrow mt-6 text-gold-300">Om Gan Ganapataye Namaha</span>
-              <h1 className="mt-4 max-w-xl font-display text-4xl leading-tight text-cream-50 sm:text-5xl">
+              <h1 className="mt-8 max-w-xl font-display text-4xl leading-tight text-cream-50 sm:text-5xl">
                 Sri Vakrathunda <span className="text-gilded">Vinayagar</span> Temple
               </h1>
 
