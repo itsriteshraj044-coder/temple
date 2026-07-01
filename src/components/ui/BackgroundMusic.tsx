@@ -2,16 +2,21 @@ import { useEffect, useRef, useState } from 'react'
 import { HiMiniSpeakerWave, HiMiniSpeakerXMark } from 'react-icons/hi2'
 
 /**
- * Ambient temple music that starts softly on every load/refresh. Browsers
- * block audio with sound from autoplaying until the visitor interacts with
- * the page, so we try to play immediately and, if that's rejected, start on
- * the first user gesture (scroll / tap / click / key). The floating button
- * mutes or resumes for the current session — the preference is intentionally
- * NOT persisted, so the music always attempts to play again on refresh.
+ * Ambient temple music.
+ *
+ * Browsers block audible autoplay until the visitor interacts with the page,
+ * so we can't legally make sound appear before any interaction. Instead we use
+ * the standard pattern: start playing *muted* right away (muted autoplay is
+ * always allowed), then unmute on the very first user gesture — a tap, click
+ * or key press — so the music becomes audible the instant they touch the page,
+ * with no lag and without needing to find a button. Nothing is persisted, so
+ * it always starts again on refresh.
  */
 const SRC = '/audio/temple-music.mp3'
 const VOLUME = 0.05 // very soft, background level
-const GESTURES = ['pointerdown', 'keydown', 'touchstart', 'wheel', 'scroll'] as const
+// Only true "user activation" events can unmute per the browser autoplay
+// policy (scroll / wheel / mousemove do not count).
+const GESTURES = ['pointerdown', 'click', 'keydown', 'touchstart', 'touchend'] as const
 
 export function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -22,43 +27,42 @@ export function BackgroundMusic() {
     if (!audio) return
     audio.volume = VOLUME
 
-    const cleanup = () => GESTURES.forEach((e) => window.removeEventListener(e, start))
-    function start() {
-      audio!.volume = VOLUME
-      audio!
+    // 1) Begin playback immediately, muted — this is always permitted.
+    audio.muted = true
+    audio.play().catch(() => {})
+
+    // 2) On the first real interaction, unmute so it becomes audible.
+    const enable = () => {
+      audio.muted = false
+      audio.volume = VOLUME
+      audio
         .play()
         .then(() => {
-          setPlaying(true)
-          cleanup()
+          if (!audio.muted && !audio.paused) {
+            setPlaying(true)
+            GESTURES.forEach((e) => window.removeEventListener(e, enable))
+          }
         })
-        .catch(() => {
-          /* still blocked — keep waiting for another gesture */
-        })
+        .catch(() => {})
     }
+    GESTURES.forEach((e) => window.addEventListener(e, enable, { passive: true }))
 
-    // Try immediate autoplay; if the browser blocks it, wait for a gesture.
-    audio
-      .play()
-      .then(() => setPlaying(true))
-      .catch(() => {
-        GESTURES.forEach((e) => window.addEventListener(e, start, { passive: true }))
-      })
-
-    return cleanup
+    return () => GESTURES.forEach((e) => window.removeEventListener(e, enable))
   }, [])
 
   const toggle = () => {
     const audio = audioRef.current
     if (!audio) return
-    if (audio.paused) {
+    if (!audio.paused && !audio.muted) {
+      audio.pause()
+      setPlaying(false)
+    } else {
+      audio.muted = false
       audio.volume = VOLUME
       audio
         .play()
         .then(() => setPlaying(true))
         .catch(() => {})
-    } else {
-      audio.pause()
-      setPlaying(false)
     }
   }
 
