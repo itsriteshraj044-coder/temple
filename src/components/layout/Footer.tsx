@@ -23,9 +23,9 @@ export function Footer() {
           <div>
             <div className="mb-6 flex items-center gap-4">
               <img
-                src="/images/svvt-emblem.webp"
-                alt={`${SITE.name} emblem`}
-                className="h-16 w-16 shrink-0 object-contain [filter:brightness(0)_invert(1)] sm:h-20 sm:w-20"
+                src="/Client%20Website%20Logo.svg"
+                alt={`${SITE.name} logo`}
+                className="h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20"
               />
               <span className="eyebrow text-gold-300">The Basin · Victoria</span>
             </div>
