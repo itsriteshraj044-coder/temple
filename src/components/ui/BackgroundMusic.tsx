@@ -157,10 +157,10 @@ export function BackgroundMusic() {
                 className="relative flex flex-col items-center"
               >
                 <img
-                  src="/images/svvt-emblem.webp"
+                  src="/Client%20Website%20Logo.svg"
                   alt=""
                   aria-hidden
-                  className="h-24 w-24 object-contain opacity-95 [filter:brightness(0)_invert(1)] sm:h-28 sm:w-28"
+                  className="h-56 w-56 object-contain opacity-95 [filter:brightness(0)_invert(1)] sm:h-64 sm:w-64"
                 />
                 <h1 className="mt-8 max-w-xl font-display text-4xl leading-tight text-cream-50 sm:text-5xl">
                   Sri Vakrathunda <span className="text-gilded">Vinayagar</span> Temple

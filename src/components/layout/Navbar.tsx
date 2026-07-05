@@ -53,8 +53,8 @@ export function Navbar() {
             aria-label={`${SITE.name} — home`}
           >
             <img
-              src="/images/svvt-emblem.webp"
-              alt={`${SITE.name} emblem`}
+              src="/Client%20Website%20Logo.svg"
+              alt={`${SITE.name} logo`}
               className="h-14 w-14 shrink-0 object-contain sm:h-16 sm:w-16 2xl:h-20 2xl:w-20"
             />
             <span className="leading-tight">
