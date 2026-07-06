@@ -25,7 +25,7 @@ export function Footer() {
               <img
                 src="/Client%20Website%20Logo.svg"
                 alt={`${SITE.name} logo`}
-                className="h-24 w-24 shrink-0 object-contain [filter:brightness(0)_invert(1)] sm:h-28 sm:w-28"
+                className="h-32 w-32 shrink-0 object-contain [filter:brightness(0)_invert(1)] sm:h-40 sm:w-40"
               />
               <span className="eyebrow text-gold-300">The Basin · Victoria</span>
             </div>

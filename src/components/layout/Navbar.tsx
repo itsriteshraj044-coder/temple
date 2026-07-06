@@ -39,7 +39,7 @@ export function Navbar() {
       >
         <nav
           className={`shell flex items-center justify-between ${
-            scrolled ? 'py-1.5' : 'py-3'
+            scrolled ? 'py-0.5' : 'py-1.5'
           }`}
         >
           {/* Brand */}
@@ -55,7 +55,7 @@ export function Navbar() {
             <img
               src="/Client%20Website%20Logo.svg"
               alt={`${SITE.name} logo`}
-              className="h-14 w-14 shrink-0 object-contain [filter:brightness(0)] sm:h-16 sm:w-16 2xl:h-20 2xl:w-20"
+              className="h-16 w-16 shrink-0 object-contain [filter:brightness(0)] sm:h-20 sm:w-20 2xl:h-24 2xl:w-24"
             />
             <span className="leading-tight">
               <span className="block whitespace-nowrap font-display text-[0.8rem] font-semibold text-maroon-900 transition-colors duration-500 sm:text-[0.95rem] xl:text-[0.85rem] 2xl:text-[0.95rem]">
