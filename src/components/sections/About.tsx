@@ -3,10 +3,11 @@ import { useParallax } from '@/hooks/useParallax'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
-import { ABOUT } from '@/data/content'
 import { IMAGES } from '@/data/images'
+import { useContent } from '@/i18n/lang'
 
 export function About() {
+  const { ABOUT } = useContent()
   const imgRef = useParallax<HTMLDivElement>(60)
   const reduceMotion = useReducedMotion()
 
@@ -63,7 +64,11 @@ export function About() {
 
         {/* Text */}
         <div className="lg:col-span-7 lg:order-2">
-          <SectionHeading eyebrow={ABOUT.eyebrow} title={ABOUT.title} />
+          <SectionHeading
+            eyebrow={ABOUT.eyebrow}
+            title={ABOUT.title}
+            titleStyle={{ color: '#8a2526' }}
+          />
           <Reveal delay={0.1}>
             <p className="text-lead-xl mt-8 font-serif leading-relaxed text-maroon-800">
               {ABOUT.lead}

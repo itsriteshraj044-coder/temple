@@ -4,10 +4,11 @@ import { useTextReveal } from '@/hooks/useTextReveal'
 import { Reveal } from '@/components/ui/Reveal'
 import { Button } from '@/components/ui/Button'
 import { Img } from '@/components/ui/Img'
-import { DONATE } from '@/data/content'
 import { IMAGES } from '@/data/images'
+import { useContent } from '@/i18n/lang'
 
 export function Donate() {
+  const { DONATE } = useContent()
   const bg = useParallax<HTMLDivElement>(60)
   const title = useTextReveal<HTMLHeadingElement>({ stagger: 0.05 })
 

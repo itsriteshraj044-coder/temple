@@ -1,15 +1,20 @@
 import { HiOutlineClock } from 'react-icons/hi2'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
-import { TIMINGS } from '@/data/content'
+import { useContent } from '@/i18n/lang'
 
 export function Timings() {
+  const { TIMINGS, UI } = useContent()
   return (
     <section id="timings" className="relative bg-cream-100 py-24 sm:py-32 lg:py-40">
       <div className="shell">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
           <div className="lg:col-span-5">
-            <SectionHeading eyebrow={TIMINGS.eyebrow} title={TIMINGS.title} />
+            <SectionHeading
+              eyebrow={TIMINGS.eyebrow}
+              title={TIMINGS.title}
+              titleStyle={{ color: '#8a2526' }}
+            />
             <Reveal delay={0.1}>
               <p className="mt-7 max-w-md text-[1.05rem] leading-relaxed text-ink-700">
                 {TIMINGS.note}
@@ -18,7 +23,7 @@ export function Timings() {
             <Reveal delay={0.15}>
               <span className="mt-10 inline-flex items-center gap-3 text-saffron-600">
                 <HiOutlineClock className="h-6 w-6" />
-                <span className="font-serif text-xl text-maroon-900">Open daily for darshan</span>
+                <span className="font-serif text-xl text-maroon-900">{UI.openDailyDarshan}</span>
               </span>
             </Reveal>
           </div>
@@ -29,7 +34,7 @@ export function Timings() {
                 <Reveal key={s.day} delay={0.1 + i * 0.1} className="bg-cream-50">
                   <div className="flex h-full flex-col justify-between p-8 sm:p-10">
                     <div>
-                      <span className="eyebrow text-saffron-600">{`Session ${i === 0 ? 'I' : 'II'}`}</span>
+                      <span className="eyebrow text-saffron-600">{`${UI.session} ${i === 0 ? 'I' : 'II'}`}</span>
                       <h3 className="mt-3 font-display text-2xl text-maroon-900 sm:text-3xl">
                         {s.day}
                       </h3>

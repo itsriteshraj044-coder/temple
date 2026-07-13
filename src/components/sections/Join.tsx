@@ -2,21 +2,23 @@ import { HiOutlineUserGroup, HiOutlineHeart, HiArrowUpRight } from 'react-icons/
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
-import { JOIN } from '@/data/content'
 import { IMAGES } from '@/data/images'
+import { useContent, useLang } from '@/i18n/lang'
 
 export function Join() {
+  const { JOIN, UI } = useContent()
+  const { lang } = useLang()
   const cards = [
     {
       icon: HiOutlineUserGroup,
-      title: 'Membership',
-      body: 'Enrol as a member and become part of the temple family, with a voice in our shared journey.',
+      title: UI.membershipTitle,
+      body: UI.membershipBody,
       cta: JOIN.membershipCta,
     },
     {
       icon: HiOutlineHeart,
-      title: 'Volunteer',
-      body: 'Offer your time and skills in seva — from festivals to the canteen and community programs.',
+      title: UI.volunteerTitle,
+      body: UI.volunteerBody,
       cta: JOIN.volunteerCta,
     },
   ]
@@ -26,16 +28,27 @@ export function Join() {
       <span id="community" className="absolute -top-24" aria-hidden />
       <div className="shell grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
         <div className="lg:col-span-6">
-          <SectionHeading eyebrow={JOIN.eyebrow} title={JOIN.title} />
+          <SectionHeading
+            eyebrow={JOIN.eyebrow}
+            title={JOIN.title}
+            titleStyle={{ color: '#8a2526' }}
+            titleClassName={
+              lang === 'ta'
+                ? 'font-display text-4xl leading-tight sm:text-5xl lg:text-6xl'
+                : 'text-display'
+            }
+          />
           <Reveal delay={0.1}>
-            <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink-700">{JOIN.body}</p>
+            <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed" style={{ color: '#8a2526' }}>
+              {JOIN.body}
+            </p>
           </Reveal>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {cards.map((c, i) => (
               <Reveal key={c.title} delay={0.1 + i * 0.1}>
                 <div className="group flex h-full flex-col rounded-[1.5rem] bg-cream-100 p-7 transition-colors duration-500 hover:bg-cream-200">
-                  <span className="grid h-12 w-12 place-items-center rounded-full bg-maroon-900 text-gold-300">
+                  <span className="grid h-12 w-12 place-items-center rounded-full bg-[#8a2526] text-gold-300">
                     <c.icon className="h-6 w-6" />
                   </span>
                   <h3 className="mt-5 font-display text-2xl text-maroon-900">{c.title}</h3>

@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { useTextReveal } from '@/hooks/useTextReveal'
 
 interface SectionHeadingProps {
@@ -7,6 +8,7 @@ interface SectionHeadingProps {
   light?: boolean
   className?: string
   titleClassName?: string
+  titleStyle?: CSSProperties
 }
 
 /**
@@ -20,6 +22,7 @@ export function SectionHeading({
   light = false,
   className = '',
   titleClassName = 'text-display',
+  titleStyle,
 }: SectionHeadingProps) {
   const titleRef = useTextReveal<HTMLHeadingElement>()
   const alignCls = align === 'center' ? 'items-center text-center mx-auto' : 'items-start'
@@ -39,6 +42,7 @@ export function SectionHeading({
       </span>
       <h2
         ref={titleRef}
+        style={titleStyle}
         className={`${titleClassName} ${light ? 'text-cream-50' : 'text-maroon-900'}`}
       >
         {title}

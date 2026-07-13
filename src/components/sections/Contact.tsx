@@ -2,15 +2,17 @@ import { HiOutlineMapPin, HiOutlinePhone, HiOutlineEnvelope, HiArrowUpRight } fr
 import { useTextReveal } from '@/hooks/useTextReveal'
 import { Reveal } from '@/components/ui/Reveal'
 import { Button } from '@/components/ui/Button'
-import { CONTACT, SITE } from '@/data/content'
+import { SITE } from '@/data/content'
+import { useContent } from '@/i18n/lang'
 
 export function Contact() {
+  const { CONTACT, UI } = useContent()
   const title = useTextReveal<HTMLHeadingElement>()
 
   const details = [
-    { icon: HiOutlineMapPin, label: 'Address', value: SITE.address, href: 'https://maps.google.com/?q=1294+Mountain+Highway+The+Basin+VIC+3154' },
-    { icon: HiOutlinePhone, label: 'Phone', value: SITE.phone, href: SITE.phoneHref },
-    { icon: HiOutlineEnvelope, label: 'Email', value: SITE.email, href: `mailto:${SITE.email}` },
+    { icon: HiOutlineMapPin, label: UI.contactAddress, value: SITE.address, href: 'https://maps.google.com/?q=1294+Mountain+Highway+The+Basin+VIC+3154', map: true },
+    { icon: HiOutlinePhone, label: UI.contactPhone, value: SITE.phone, href: SITE.phoneHref, map: false },
+    { icon: HiOutlineEnvelope, label: UI.contactEmail, value: SITE.email, href: `mailto:${SITE.email}`, map: false },
   ]
 
   return (
@@ -38,10 +40,10 @@ export function Contact() {
             <Reveal delay={0.2}>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button href={SITE.phoneHref} variant="solid" icon={<HiArrowUpRight />} className="ring-1 ring-gold-400/40">
-                  Call the Temple
+                  {UI.callTemple}
                 </Button>
                 <Button href="#join" variant="ghost">
-                  Join the Community
+                  {UI.joinCommunity}
                 </Button>
               </div>
             </Reveal>
@@ -53,8 +55,8 @@ export function Contact() {
                 <Reveal as="li" key={d.label} delay={0.1 + i * 0.08}>
                   <a
                     href={d.href}
-                    target={d.label === 'Address' ? '_blank' : undefined}
-                    rel={d.label === 'Address' ? 'noreferrer' : undefined}
+                    target={d.map ? '_blank' : undefined}
+                    rel={d.map ? 'noreferrer' : undefined}
                     className="group flex items-start gap-5 border-b border-cream-50/12 py-5 transition-colors hover:border-gold-400/40"
                   >
                     <span className="mt-1 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-cream-50/20 text-gold-300 transition-colors group-hover:border-gold-400 group-hover:bg-gold-400/10">

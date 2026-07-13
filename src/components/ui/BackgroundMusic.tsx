@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { HiMiniSpeakerWave, HiMiniSpeakerXMark } from 'react-icons/hi2'
 import type Lenis from 'lenis'
+import { useLang } from '@/i18n/lang'
+import { getContent, type Lang } from '@/data/content'
 
 /**
  * Temple music with a welcome gate.
@@ -20,6 +22,7 @@ export function BackgroundMusic() {
   const btnRef = useRef<HTMLButtonElement | null>(null)
   const [entered, setEntered] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const { setLang } = useLang()
 
   const lockScroll = (lock: boolean) => {
     const lenis = (window as Window & { __lenis?: Lenis }).__lenis
@@ -45,7 +48,10 @@ export function BackgroundMusic() {
     return () => lockScroll(false)
   }, [])
 
-  const enter = () => {
+  // Enter the site in the chosen language (defaults to the current one). The tap
+  // is the user gesture browsers require before audible autoplay is allowed.
+  const enter = (lang?: Lang) => {
+    if (lang) setLang(lang)
     const audio = audioRef.current
     if (audio) {
       audio.muted = false
@@ -84,10 +90,9 @@ export function BackgroundMusic() {
         {!entered && (
           <motion.div
             key="temple-gate"
-            onClick={enter}
             role="dialog"
             aria-label="Enter the temple"
-            className="fixed inset-0 z-[100] cursor-pointer overflow-hidden"
+            className="fixed inset-0 z-[100] overflow-hidden"
           >
             {/* Left door */}
             <motion.div
@@ -166,20 +171,35 @@ export function BackgroundMusic() {
                   Sri Vakrathunda <span className="text-gilded">Vinayagar</span> Temple
                 </h1>
 
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    enter()
-                  }}
-                  className="group mt-10 inline-flex items-center gap-3 rounded-full bg-saffron-500 px-8 py-4 text-sm font-medium tracking-wide text-maroon-950 shadow-[0_18px_40px_-14px_rgba(238,123,30,0.7)] transition-colors duration-300 hover:bg-saffron-400"
-                >
-                  <HiMiniSpeakerWave className="h-5 w-5" />
-                  Enter Temple
-                </button>
-                <span className="mt-4 text-xs tracking-[0.15em] text-cream-100/50 uppercase">
-                  Tap anywhere · with temple music
+                <span className="mt-8 text-xs tracking-[0.15em] text-cream-100/60 uppercase">
+                  {getContent('en').UI.splashSubtitle} · {getContent('ta').UI.splashSubtitle}
                 </span>
+
+                {/* Language choice — the tap also starts the temple music */}
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      enter('ta')
+                    }}
+                    className="group inline-flex items-center gap-3 rounded-full bg-saffron-500 px-8 py-4 text-base font-medium tracking-wide text-maroon-950 shadow-[0_18px_40px_-14px_rgba(238,123,30,0.7)] transition-colors duration-300 hover:bg-saffron-400"
+                  >
+                    <HiMiniSpeakerWave className="h-5 w-5" />
+                    தமிழ்
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      enter('en')
+                    }}
+                    className="group inline-flex items-center gap-3 rounded-full border border-gold-400/50 bg-transparent px-8 py-4 text-base font-medium tracking-wide text-cream-50 transition-colors duration-300 hover:border-gold-300 hover:bg-cream-50/5"
+                  >
+                    <HiMiniSpeakerWave className="h-5 w-5" />
+                    English
+                  </button>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>

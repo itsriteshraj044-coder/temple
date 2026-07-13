@@ -5,7 +5,8 @@ import { HiArrowLongLeft, HiXMark } from 'react-icons/hi2'
 import { Img } from '@/components/ui/Img'
 import { Reveal } from '@/components/ui/Reveal'
 import { Footer } from '@/components/layout/Footer'
-import { EVENTS, SITE, type EventItem } from '@/data/content'
+import { SITE, type EventItem } from '@/data/content'
+import { useContent } from '@/i18n/lang'
 import { navigate } from '@/lib/router'
 
 /** Month label like "July 2026" from an ISO start date. */
@@ -14,15 +15,6 @@ function monthLabel(iso: string) {
     month: 'long',
     year: 'numeric',
   })
-}
-
-/** Filter categories in first-appearance order, prefixed with "All". */
-function useCategories() {
-  return useMemo(() => {
-    const seen: string[] = []
-    for (const e of EVENTS.items) if (!seen.includes(e.category)) seen.push(e.category)
-    return ['All', ...seen]
-  }, [])
 }
 
 /** Group an ordered event list into [month, events] buckets, preserving order. */
@@ -38,13 +30,20 @@ function groupByMonth(items: EventItem[]) {
 }
 
 export function ECalendar() {
-  const categories = useCategories()
+  const { EVENTS, UI } = useContent()
   const [filter, setFilter] = useState('All')
   const [zoom, setZoom] = useState<EventItem | null>(null)
 
+  // Filter categories in first-appearance order, prefixed with "All".
+  const categories = useMemo(() => {
+    const seen: string[] = []
+    for (const e of EVENTS.items) if (!seen.includes(e.category)) seen.push(e.category)
+    return ['All', ...seen]
+  }, [EVENTS])
+
   const filtered = useMemo(
     () => (filter === 'All' ? EVENTS.items : EVENTS.items.filter((e) => e.category === filter)),
-    [filter],
+    [filter, EVENTS],
   )
   const groups = useMemo(() => groupByMonth(filtered), [filtered])
 
@@ -91,10 +90,10 @@ export function ECalendar() {
             type="button"
             onClick={goHome}
             className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-maroon-900/30 px-3.5 py-2.5 text-sm font-medium tracking-wide text-maroon-900 transition-colors hover:border-maroon-900/60 hover:bg-maroon-900 hover:text-cream-50 sm:px-5"
-            aria-label="Back to Home"
+            aria-label={UI.backToHome}
           >
             <HiArrowLongLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
-            <span className="hidden sm:inline">Back to Home</span>
+            <span className="hidden sm:inline">{UI.backToHome}</span>
           </button>
         </div>
       </header>
@@ -104,12 +103,12 @@ export function ECalendar() {
         <Reveal>
           <span className="eyebrow mb-5 inline-flex items-center gap-3 text-saffron-600">
             <span aria-hidden className="h-px w-8 bg-saffron-500/60" />
-            Temple Calendar · 2026
+            {UI.calYear}
           </span>
         </Reveal>
         <Reveal delay={0.05}>
           <h1 className="font-display text-5xl leading-[0.95] text-maroon-900 sm:text-6xl lg:text-7xl">
-            E-Calendar
+            {UI.eCalendarTitle}
           </h1>
         </Reveal>
         <Reveal delay={0.1}>
@@ -133,7 +132,7 @@ export function ECalendar() {
                       : 'border-maroon-900/25 text-maroon-900 hover:border-maroon-900/50 hover:bg-maroon-900/5'
                   }`}
                 >
-                  {c}
+                  {c === 'All' ? UI.all : c}
                 </button>
               )
             })}
@@ -149,7 +148,8 @@ export function ECalendar() {
               <div className="flex items-center gap-5 border-t border-maroon-900/10 pt-7">
                 <h2 className="font-display text-3xl text-maroon-900 sm:text-4xl">{group.label}</h2>
                 <span className="font-serif text-base italic text-ink-500">
-                  {group.events.length} {group.events.length === 1 ? 'observance' : 'observances'}
+                  {group.events.length}{' '}
+                  {group.events.length === 1 ? UI.observanceSingular : UI.observancePlural}
                 </span>
               </div>
             </Reveal>
@@ -187,7 +187,7 @@ export function ECalendar() {
 
         {groups.length === 0 && (
           <p className="mt-16 text-center font-serif text-lg italic text-ink-500">
-            No observances in this category.
+            {UI.noObservances}
           </p>
         )}
       </section>

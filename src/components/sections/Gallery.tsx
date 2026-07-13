@@ -5,8 +5,8 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
 import { Lightbox, type Photo } from '@/components/ui/Lightbox'
-import { GALLERY } from '@/data/content'
 import { IMAGES } from '@/data/images'
+import { useContent } from '@/i18n/lang'
 
 // Editorial, asymmetric layout — the first photo of each album is the hero tile.
 const spans = [
@@ -24,16 +24,23 @@ function albumPhotos(section: (typeof IMAGES.gallerySections)[number]): Photo[] 
 }
 
 export function Gallery() {
+  const { GALLERY, UI } = useContent()
   // Which section's album is open, and at which photo. null = closed.
   const [open, setOpen] = useState<{ section: number; index: number } | null>(null)
 
   const activePhotos = open !== null ? albumPhotos(IMAGES.gallerySections[open.section]) : []
+  // Translated title/blurb per album (photos themselves stay in the image manifest).
+  const sectionText = (s: number) => GALLERY.sections[s] ?? { title: '', blurb: '' }
 
   return (
     <section id="gallery" className="relative bg-cream-100 py-24 sm:py-32 lg:py-40">
       <div className="shell">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading eyebrow={GALLERY.eyebrow} title={GALLERY.title} />
+          <SectionHeading
+            eyebrow={GALLERY.eyebrow}
+            title={GALLERY.title}
+            titleStyle={{ color: '#8a2526' }}
+          />
           <Reveal delay={0.1}>
             <p className="max-w-sm text-[1.05rem] leading-relaxed text-ink-700">{GALLERY.body}</p>
           </Reveal>
@@ -45,20 +52,20 @@ export function Gallery() {
             <Reveal>
               <div className="flex flex-col gap-4 border-t border-maroon-900/10 pt-7 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <h3 className="font-display text-3xl text-maroon-900 sm:text-4xl">
-                    {section.title}
+                  <h3 className="font-display text-3xl sm:text-4xl" style={{ color: '#8a2526' }}>
+                    {sectionText(s).title}
                   </h3>
                   <p className="mt-2 max-w-md font-serif text-lg italic text-ink-600">
-                    {section.blurb}
+                    {sectionText(s).blurb}
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setOpen({ section: s, index: 0 })}
                   className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-maroon-900/30 px-5 py-2.5 text-sm font-medium tracking-wide text-maroon-900 transition-colors hover:border-maroon-900/60 hover:bg-maroon-900 hover:text-cream-50 sm:self-auto"
-                  aria-label={`View all ${section.photos.length} photos from ${section.title}`}
+                  aria-label={`${UI.viewAll} — ${sectionText(s).title}`}
                 >
-                  View all {section.photos.length}
+                  {UI.viewAll} {section.photos.length}
                   <HiArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </button>
               </div>
@@ -89,7 +96,7 @@ export function Gallery() {
       <Lightbox
         photos={activePhotos}
         index={open?.index ?? null}
-        title={open !== null ? IMAGES.gallerySections[open.section].title : undefined}
+        title={open !== null ? sectionText(open.section).title : undefined}
         onClose={() => setOpen(null)}
         onIndexChange={(i) => setOpen((o) => (o ? { ...o, index: i } : o))}
       />

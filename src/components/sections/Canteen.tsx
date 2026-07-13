@@ -3,10 +3,12 @@ import { useParallax } from '@/hooks/useParallax'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
-import { CANTEEN, SITE } from '@/data/content'
+import { SITE } from '@/data/content'
 import { IMAGES } from '@/data/images'
+import { useContent } from '@/i18n/lang'
 
 export function Canteen() {
+  const { CANTEEN, UI } = useContent()
   const imgRef = useParallax<HTMLDivElement>(55)
 
   return (
@@ -23,14 +25,18 @@ export function Canteen() {
             delay={0.15}
             className="absolute -right-3 -top-6 rounded-2xl bg-saffron-500 px-5 py-4 text-maroon-950 shadow-soft sm:right-8"
           >
-            <span className="block font-display text-lg leading-none">Prasadam</span>
-            <span className="mt-1 block text-[0.62rem] tracking-[0.2em] uppercase">Vegetarian</span>
+            <span className="block font-display text-lg leading-none">{UI.prasadam}</span>
+            <span className="mt-1 block text-[0.62rem] tracking-[0.2em] uppercase">{UI.vegetarian}</span>
           </Reveal>
         </div>
 
         {/* Hours */}
         <div>
-          <SectionHeading eyebrow={CANTEEN.eyebrow} title={CANTEEN.title} />
+          <SectionHeading
+            eyebrow={CANTEEN.eyebrow}
+            title={CANTEEN.title}
+            titleStyle={{ color: '#8a2526' }}
+          />
           <Reveal delay={0.1}>
             <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink-700">
               {CANTEEN.body}
@@ -53,7 +59,7 @@ export function Canteen() {
               href={SITE.canteenPhoneHref}
               className="mt-8 inline-flex items-center gap-3 text-maroon-900 transition-colors hover:text-saffron-600"
             >
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-maroon-900 text-gold-300">
+              <span className="grid h-11 w-11 place-items-center rounded-full bg-[#8a2526] text-gold-300">
                 <HiPhone className="h-5 w-5" />
               </span>
               <span>

@@ -5,8 +5,10 @@ import { useParallax } from '@/hooks/useParallax'
 import { Button } from '@/components/ui/Button'
 import { IMAGES } from '@/data/images'
 import { SITE } from '@/data/content'
+import { useContent } from '@/i18n/lang'
 
 export function Hero() {
+  const { UI } = useContent()
   const root = useRef<HTMLElement>(null)
   const media = useParallax<HTMLDivElement>(45)
   const ringRef = useRef<HTMLImageElement>(null)
@@ -75,7 +77,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute left-5 top-1/2 hidden -translate-y-1/2 -rotate-180 text-[0.62rem] tracking-[0.5em] text-maroon-900/40 uppercase [writing-mode:vertical-rl] xl:block"
       >
-        Om Gan Ganapataye Namaha
+        {UI.omMantra}
       </span>
 
       <div className="hero-grid relative z-10 shell grid grid-cols-1 items-center gap-6 pb-20 pt-28 sm:gap-8 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-28">
@@ -86,13 +88,13 @@ export function Hero() {
             className="eyebrow inline-flex items-center gap-3 text-saffron-600"
           >
             <span className="h-px w-10 bg-saffron-500/60" />
-            Established in Victoria 1992
+            {UI.heroEyebrow}
           </span>
 
           <h1 className="mt-7 font-display text-maroon-900">
             <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
-              <span data-hero="line" className="block whitespace-nowrap text-hero font-medium" style={{ lineHeight: 1.05 }}>
-                Sri Vakrathunda
+              <span data-hero="line" className="block whitespace-nowrap text-hero font-medium" style={{ lineHeight: 1.05, color: '#8a2526' }}>
+                {UI.titleLine1}
               </span>
             </span>
             <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
@@ -101,12 +103,12 @@ export function Hero() {
                 className="block whitespace-nowrap text-hero font-medium text-gilded"
                 style={{ lineHeight: 1.05, paddingBottom: '0.1em' }}
               >
-                Vinayagar
+                {UI.titleLine2}
               </span>
             </span>
             <span className="block overflow-hidden text-hero pb-[0.28em] -mb-[0.28em] pt-[0.1em] -mt-[0.1em]">
-              <span data-hero="line" className="block whitespace-nowrap text-hero font-medium" style={{ lineHeight: 1.05 }}>
-                Temple
+              <span data-hero="line" className="block whitespace-nowrap text-hero font-medium" style={{ lineHeight: 1.05, color: '#8a2526' }}>
+                {UI.titleLine3}
               </span>
             </span>
           </h1>
@@ -115,18 +117,18 @@ export function Hero() {
             data-hero="lead"
             className="mt-8 max-w-md font-serif leading-relaxed text-ink-700 text-[clamp(1.4rem,1.25vw,2rem)] xl:max-w-lg 3xl:max-w-xl"
           >
-            {SITE.tagline}. A living sanctuary of devotion, culture and community.
+            {UI.heroLead}
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <span data-hero="cta">
               <Button href="#contact" variant="solid" icon={<HiArrowUpRight />}>
-                Plan Your Visit
+                {UI.planVisit}
               </Button>
             </span>
             <span data-hero="cta">
               <Button href="#timings" variant="outline">
-                Temple Timings
+                {UI.templeTimings}
               </Button>
             </span>
           </div>
@@ -138,9 +140,9 @@ export function Hero() {
           >
             <div>
               <div className="text-[0.62rem] tracking-[0.25em] text-ink-500 uppercase">
-                Open Daily
+                {UI.openDaily}
               </div>
-              <div className="mt-1 font-serif text-lg text-maroon-900">Darshan &amp; Abishegam</div>
+              <div className="mt-1 font-serif text-lg text-maroon-900">{UI.darshanAbishegam}</div>
             </div>
             <div className="hidden h-8 w-px bg-maroon-900/10 lg:block" />
             <a
@@ -148,7 +150,7 @@ export function Hero() {
               className="group transition-colors"
               aria-label={`Call the temple at ${SITE.phone}`}
             >
-              <div className="text-[0.62rem] tracking-[0.25em] text-ink-500 uppercase">Call</div>
+              <div className="text-[0.62rem] tracking-[0.25em] text-ink-500 uppercase">{UI.call}</div>
               <div className="mt-1 font-serif text-lg text-maroon-900 group-hover:text-saffron-600">
                 {SITE.phone}
               </div>
@@ -210,7 +212,7 @@ export function Hero() {
           document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })
         }}
       >
-        <span className="text-[0.6rem] tracking-[0.3em] uppercase">Scroll</span>
+        <span className="text-[0.6rem] tracking-[0.3em] uppercase">{UI.scroll}</span>
         <span className="flex h-10 w-6 justify-center rounded-full border border-maroon-900/30 pt-2">
           <span className="h-2 w-1 animate-bounce rounded-full bg-saffron-500" />
         </span>

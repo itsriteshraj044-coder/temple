@@ -4,7 +4,7 @@ import { HiArrowUpRight } from 'react-icons/hi2'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
-import { SERVICES } from '@/data/content'
+import { useContent } from '@/i18n/lang'
 
 /**
  * Service photography chosen to match each offering's content. Kept beside the
@@ -27,6 +27,7 @@ const MEDIA = [
  * than a CSS transition, because browsers do not reliably tween `flex-grow`.
  */
 export function Services() {
+  const { SERVICES, UI } = useContent()
   const [active, setActive] = useState(0)
   const reduceMotion = useReducedMotion()
 
@@ -44,11 +45,12 @@ export function Services() {
           <SectionHeading
             eyebrow={SERVICES.eyebrow}
             title={SERVICES.title}
+            titleStyle={{ color: '#8a2526' }}
             className="lg:col-span-8"
           />
           <Reveal className="lg:col-span-4" delay={0.15}>
             <p className="text-[1.05rem] leading-relaxed text-ink-700 lg:text-right">
-              Offered with devotion by our priests, in keeping with timeless Agamic tradition.
+              {UI.servicesIntro}
             </p>
           </Reveal>
         </div>
@@ -136,7 +138,7 @@ export function Services() {
                             {s.description}
                           </p>
                           <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium tracking-wide text-gold-300 transition-colors duration-300 group-hover:text-saffron-400">
-                            Enquire
+                            {UI.enquire}
                             <HiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                           </span>
                         </div>

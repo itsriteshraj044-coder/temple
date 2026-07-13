@@ -4,10 +4,11 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Img } from '@/components/ui/Img'
 import { scrollToHash } from '@/providers/SmoothScroll'
-import { HISTORY } from '@/data/content'
 import { IMAGES } from '@/data/images'
+import { useContent } from '@/i18n/lang'
 
 export function History() {
+  const { HISTORY, UI } = useContent()
   const imgRef = useParallax<HTMLDivElement>(80)
 
   return (
@@ -42,7 +43,7 @@ export function History() {
 
           {/* timeline accents */}
           <div className="mt-10 flex flex-wrap gap-x-12 gap-y-6">
-            {['Aspiration', 'Seva', 'Granite Shrine', 'Consecration'].map((step, i) => (
+            {UI.historySteps.map((step, i) => (
               <Reveal key={step} delay={0.15 + i * 0.08}>
                 <div className="flex items-center gap-3">
                   <span className="grid h-8 w-8 place-items-center rounded-full border border-gold-400/40 font-display text-sm text-gold-300">
@@ -69,7 +70,7 @@ export function History() {
                 className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gradient-to-r from-gold-300 to-saffron-400 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
               />
               <span className="relative z-10 flex items-center gap-3">
-                Read More
+                {UI.readMore}
                 <HiArrowLongRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
               </span>
             </a>

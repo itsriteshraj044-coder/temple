@@ -9,12 +9,13 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
 import { Button } from '@/components/ui/Button'
 import { Img } from '@/components/ui/Img'
-import { EVENTS } from '@/data/content'
+import { useContent } from '@/i18n/lang'
 
 // Duration of one slide advance in the continuous marquee (ms).
 const MARQUEE_MS = 6000
 
 export function Events() {
+  const { EVENTS } = useContent()
   const swiperRef = useRef<SwiperType | null>(null)
   const reduceMotion = useReducedMotion()
   const hovering = useRef(false)
