@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from 'react'
 import {
   HiArrowLongLeft,
+  HiOutlineCalendarDays,
   HiOutlineClock,
   HiOutlineMoon,
   HiOutlinePhone,
@@ -10,7 +11,7 @@ import {
 } from 'react-icons/hi2'
 import { Reveal } from '@/components/ui/Reveal'
 import { Footer } from '@/components/layout/Footer'
-import { SITE } from '@/data/content'
+import { SITE, type EventItem } from '@/data/content'
 import { useContent } from '@/i18n/lang'
 import { navigate } from '@/lib/router'
 
@@ -24,16 +25,43 @@ const PERIOD: Record<Period, { Icon: ComponentType<SVGProps<SVGSVGElement>>; acc
   night: { Icon: HiOutlineMoon, accent: 'text-gold-400' },
 }
 
+/** A compact day/month badge from an ISO start date (e.g. "03" / "Jul"). */
+function dateBadge(iso: string) {
+  const d = new Date(`${iso}T00:00:00`)
+  return {
+    day: d.toLocaleDateString('en-AU', { day: '2-digit' }),
+    mon: d.toLocaleDateString('en-AU', { month: 'short' }),
+  }
+}
+
+/** Month heading like "July 2026" from an ISO start date. */
+function monthLabel(iso: string) {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })
+}
+
+/** Group ordered events into [month, events] buckets, preserving order. */
+function groupByMonth(items: EventItem[]) {
+  const groups: { label: string; events: EventItem[] }[] = []
+  for (const e of items) {
+    const label = monthLabel(e.start)
+    const last = groups[groups.length - 1]
+    if (last && last.label === label) last.events.push(e)
+    else groups.push({ label, events: [e] })
+  }
+  return groups
+}
+
 /**
  * Standalone premium page for the temple's Daily Pooja Times (route
  * `#/daily-pooja`, linked from the Flash Story ticker). The schedule is
  * presented as a "day arc" timeline from the dawn milk abishekam to the night
- * arththa jaama pooja. Content is the exact schedule published by the temple
- * (mvhs.org.au), and renders bilingually from the shared content tree.
+ * arththa jaama pooja, with the temple's occasions calendar running down the
+ * right side. Content renders bilingually from the shared content tree.
  */
 export function DailyPooja() {
-  const { DAILY_POOJA, UI } = useContent()
+  const { DAILY_POOJA, EVENTS, UI } = useContent()
   const goHome = () => navigate('home')
+  const groups = groupByMonth(EVENTS.items)
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-maroon-950 text-cream-100">
@@ -109,90 +137,159 @@ export function DailyPooja() {
         </Reveal>
       </section>
 
-      {/* Timeline */}
-      <section className="relative z-10 shell pt-14 pb-8 sm:pt-20">
-        <ol className="relative mx-auto max-w-2xl">
-          {/* vertical rail, centred on the 56px nodes */}
-          <span
-            aria-hidden
-            className="absolute left-[27px] top-6 bottom-6 w-px bg-gradient-to-b from-gold-300/50 via-gold-400/30 to-gold-400/5"
-          />
-          {DAILY_POOJA.items.map((item, i) => {
-            const { Icon, accent } = PERIOD[item.period]
-            return (
-              <li key={`${item.time}-${item.name}`} className="relative pb-7 last:pb-0">
-                <Reveal delay={i * 0.06}>
-                  <div className="flex items-stretch gap-5">
-                    {/* node */}
-                    <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold-400/40 bg-maroon-900 shadow-[0_0_24px_-6px_rgba(227,193,114,0.5)]">
-                      <Icon className={`h-6 w-6 ${accent}`} aria-hidden />
-                    </span>
-                    {/* card */}
-                    <div className="flex-1 rounded-2xl border border-gold-400/15 bg-cream-50/[0.04] p-5 backdrop-blur-sm transition-colors hover:border-gold-300/35 hover:bg-cream-50/[0.07] sm:px-6">
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <time className="font-display text-lg text-gold-300 sm:text-xl">
-                          {item.time}
-                        </time>
-                        {item.tag && (
-                          <span className="rounded-full border border-saffron-300/30 bg-saffron-300/10 px-2.5 py-0.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-saffron-300">
-                            {item.tag}
-                          </span>
-                        )}
+      {/* Two columns: pooja timeline (left) · occasions calendar (right) */}
+      <div className="relative z-10 shell pt-14 pb-24 sm:pt-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* ---------- LEFT: timeline + booking + hours ---------- */}
+          <div className="lg:col-span-7 xl:col-span-8">
+            <ol className="relative">
+              {/* vertical rail, centred on the 56px nodes */}
+              <span
+                aria-hidden
+                className="absolute left-[27px] top-6 bottom-6 w-px bg-gradient-to-b from-gold-300/50 via-gold-400/30 to-gold-400/5"
+              />
+              {DAILY_POOJA.items.map((item, i) => {
+                const { Icon, accent } = PERIOD[item.period]
+                return (
+                  <li key={`${item.time}-${item.name}`} className="relative pb-7 last:pb-0">
+                    <Reveal delay={i * 0.06}>
+                      <div className="flex items-stretch gap-5">
+                        {/* node */}
+                        <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold-400/40 bg-maroon-900 shadow-[0_0_24px_-6px_rgba(227,193,114,0.5)]">
+                          <Icon className={`h-6 w-6 ${accent}`} aria-hidden />
+                        </span>
+                        {/* card */}
+                        <div className="flex-1 rounded-2xl border border-gold-400/15 bg-cream-50/[0.04] p-5 backdrop-blur-sm transition-colors hover:border-gold-300/35 hover:bg-cream-50/[0.07] sm:px-6">
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <time className="font-display text-lg text-gold-300 sm:text-xl">
+                              {item.time}
+                            </time>
+                            {item.tag && (
+                              <span className="rounded-full border border-saffron-300/30 bg-saffron-300/10 px-2.5 py-0.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-saffron-300">
+                                {item.tag}
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="mt-1.5 font-serif text-xl text-cream-50 sm:text-2xl">
+                            {item.name}
+                          </h3>
+                        </div>
                       </div>
-                      <h3 className="mt-1.5 font-serif text-xl text-cream-50 sm:text-2xl">
-                        {item.name}
-                      </h3>
+                    </Reveal>
+                  </li>
+                )
+              })}
+            </ol>
+
+            {/* Booking + hours */}
+            <div className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-5">
+              <Reveal className="sm:col-span-3">
+                <a
+                  href={SITE.officePhoneHref}
+                  className="group flex h-full items-center gap-4 rounded-2xl border border-gold-400/30 bg-gradient-to-br from-gold-400/10 to-transparent p-6 transition-colors hover:border-gold-300/60"
+                >
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gold-400/15 ring-1 ring-gold-400/30">
+                    <HiOutlinePhone className="h-5 w-5 text-gold-300" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-gold-300/80">
+                      {DAILY_POOJA.bookingText}
+                    </span>
+                    <span className="mt-0.5 block font-display text-2xl text-cream-50 group-hover:text-gilded">
+                      {SITE.officePhone}
+                    </span>
+                    <span className="text-sm text-cream-100/60">{DAILY_POOJA.officeLabel}</span>
+                  </span>
+                </a>
+              </Reveal>
+
+              <Reveal delay={0.08} className="sm:col-span-2">
+                <div className="h-full rounded-2xl border border-gold-400/15 bg-cream-50/[0.03] p-6">
+                  <span className="eyebrow inline-flex items-center gap-2 text-gold-300">
+                    <HiOutlineClock className="h-4 w-4" />
+                    {DAILY_POOJA.hoursTitle}
+                  </span>
+                  <ul className="mt-4 space-y-3">
+                    {DAILY_POOJA.hoursLines.map((line) => (
+                      <li key={line} className="font-serif text-sm leading-relaxed text-cream-100/85">
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* ---------- RIGHT: occasions calendar ---------- */}
+          <aside className="lg:col-span-5 xl:col-span-4">
+            <Reveal delay={0.1}>
+              <div className="lg:sticky lg:top-24">
+                <div className="overflow-hidden rounded-3xl border border-gold-400/20 bg-cream-50/[0.04] backdrop-blur-sm">
+                  {/* header */}
+                  <div className="flex items-center gap-3 border-b border-gold-400/15 bg-gradient-to-r from-gold-400/10 to-transparent px-6 py-5">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold-400/15 ring-1 ring-gold-400/30">
+                      <HiOutlineCalendarDays className="h-5 w-5 text-gold-300" />
+                    </span>
+                    <div>
+                      <h2 className="font-display text-lg text-cream-50">{EVENTS.eyebrow}</h2>
+                      <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold-300/70">
+                        {UI.calYear}
+                      </p>
                     </div>
                   </div>
-                </Reveal>
-              </li>
-            )
-          })}
-        </ol>
-      </section>
 
-      {/* Booking + hours */}
-      <section className="relative z-10 shell pb-24">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-5 sm:grid-cols-5">
-          {/* booking */}
-          <Reveal className="sm:col-span-3">
-            <a
-              href={SITE.officePhoneHref}
-              className="group flex h-full items-center gap-4 rounded-2xl border border-gold-400/30 bg-gradient-to-br from-gold-400/10 to-transparent p-6 transition-colors hover:border-gold-300/60"
-            >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gold-400/15 ring-1 ring-gold-400/30">
-                <HiOutlinePhone className="h-5 w-5 text-gold-300" />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-gold-300/80">
-                  {DAILY_POOJA.bookingText}
-                </span>
-                <span className="mt-0.5 block font-display text-2xl text-cream-50 group-hover:text-gilded">
-                  {SITE.officePhone}
-                </span>
-                <span className="text-sm text-cream-100/60">{DAILY_POOJA.officeLabel}</span>
-              </span>
-            </a>
-          </Reveal>
+                  {/* scrollable occasion list */}
+                  <div className="max-h-[34rem] overflow-y-auto">
+                    {groups.map((group) => (
+                      <div key={group.label}>
+                        <h3 className="sticky top-0 z-10 bg-maroon-950/90 px-6 py-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
+                          {group.label}
+                        </h3>
+                        <ul>
+                          {group.events.map((e) => {
+                            const b = dateBadge(e.start)
+                            return (
+                              <li
+                                key={`${e.start}-${e.title}`}
+                                className="flex items-center gap-4 border-t border-gold-400/10 px-6 py-3.5 first:border-t-0"
+                              >
+                                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-gold-400/25 bg-maroon-900 leading-none">
+                                  <span className="font-display text-lg text-cream-50">{b.day}</span>
+                                  <span className="mt-0.5 text-[0.58rem] uppercase tracking-[0.14em] text-gold-300">
+                                    {b.mon}
+                                  </span>
+                                </div>
+                                <div className="min-w-0">
+                                  <h4 className="truncate font-serif text-[0.98rem] text-cream-50">
+                                    {e.title}
+                                  </h4>
+                                  <span className="text-[0.7rem] uppercase tracking-[0.14em] text-saffron-300/90">
+                                    {e.category}
+                                  </span>
+                                </div>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
 
-          {/* temple hours */}
-          <Reveal delay={0.08} className="sm:col-span-2">
-            <div className="h-full rounded-2xl border border-gold-400/15 bg-cream-50/[0.03] p-6">
-              <span className="eyebrow inline-flex items-center gap-2 text-gold-300">
-                <HiOutlineClock className="h-4 w-4" />
-                {DAILY_POOJA.hoursTitle}
-              </span>
-              <ul className="mt-4 space-y-3">
-                {DAILY_POOJA.hoursLines.map((line) => (
-                  <li key={line} className="font-serif text-sm leading-relaxed text-cream-100/85">
-                    {line}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+                  {/* footer link to full calendar */}
+                  <a
+                    href="#/e-calendar"
+                    className="group flex items-center justify-center gap-2 border-t border-gold-400/15 px-6 py-4 text-sm font-medium tracking-wide text-gold-300 transition-colors hover:bg-gold-400/10 hover:text-gilded"
+                  >
+                    {EVENTS.calendarCta}
+                    <HiArrowLongLeft className="h-4 w-4 rotate-180 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </aside>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>
