@@ -23,7 +23,7 @@ import { DailyPooja } from '@/components/sections/DailyPooja'
 import { CanteenMenu } from '@/components/sections/CanteenMenu'
 import { Abishegam } from '@/components/sections/Abishegam'
 import { Festivals } from '@/components/sections/Festivals'
-import { useRoute } from '@/lib/router'
+import { navigate, useRoute } from '@/lib/router'
 import type Lenis from 'lenis'
 
 export default function App() {
@@ -35,6 +35,24 @@ export default function App() {
     if (lenis) lenis.scrollTo(0, { immediate: true })
     else window.scrollTo(0, 0)
   }, [route])
+
+  // Intercept clicks on internal route links (href="/…") so navigation happens
+  // in-app via the History router instead of triggering a full page reload.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+        return
+      const anchor = (e.target as HTMLElement | null)?.closest('a')
+      if (!anchor) return
+      const href = anchor.getAttribute('href')
+      if (!href || !href.startsWith('/') || href.startsWith('//')) return
+      if (anchor.target && anchor.target !== '_self') return
+      e.preventDefault()
+      navigate(href)
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
+  }, [])
 
   return (
     <SmoothScroll>

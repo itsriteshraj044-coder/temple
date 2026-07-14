@@ -1,6 +1,5 @@
 import type { ComponentType, SVGProps } from 'react'
 import {
-  HiArrowLongLeft,
   HiOutlineClock,
   HiOutlineMoon,
   HiOutlinePhone,
@@ -9,11 +8,11 @@ import {
   HiSun,
 } from 'react-icons/hi2'
 import { Reveal } from '@/components/ui/Reveal'
+import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { OccasionsCalendar } from '@/components/sections/OccasionsCalendar'
 import { SITE } from '@/data/content'
 import { useContent } from '@/i18n/lang'
-import { navigate } from '@/lib/router'
 
 type Period = 'dawn' | 'morning' | 'noon' | 'night'
 
@@ -33,60 +32,25 @@ const PERIOD: Record<Period, { Icon: ComponentType<SVGProps<SVGSVGElement>>; acc
  * right side. Content renders bilingually from the shared content tree.
  */
 export function DailyPooja() {
-  const { DAILY_POOJA, UI } = useContent()
-  const goHome = () => navigate('home')
+  const { DAILY_POOJA } = useContent()
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-maroon-950 text-cream-100">
-      {/* warm sanctum glow + grain */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(60% 40% at 50% -5%, rgba(249,173,85,0.20), transparent 65%), radial-gradient(50% 40% at 100% 100%, rgba(201,161,74,0.12), transparent 70%)',
-        }}
-      />
-      <div aria-hidden className="grain absolute inset-0 opacity-60" />
-
-      {/* Top bar */}
-      <header className="sticky top-0 z-40 border-b border-gold-400/15 bg-maroon-950/80 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
-        <div className="shell flex items-center justify-between gap-3 py-4">
-          <button
-            type="button"
-            onClick={goHome}
-            className="group flex items-center gap-3"
-            aria-label={`${SITE.name} — home`}
-          >
-            <img
-              src="/Client%20Website%20Logo.svg"
-              alt={`${SITE.name} logo`}
-              className="h-14 w-14 shrink-0 object-contain [filter:brightness(0)_invert(1)] sm:h-16 sm:w-16"
-            />
-            <span className="leading-tight">
-              <span className="block font-display text-[0.8rem] font-semibold text-cream-50 sm:text-[0.95rem]">
-                Sri Vakrathunda Vinayagar
-              </span>
-              <span className="block text-[0.56rem] uppercase tracking-[0.24em] text-gold-300 sm:text-[0.62rem] sm:tracking-[0.28em]">
-                Temple · The Basin
-              </span>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={goHome}
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-cream-50/25 px-3.5 py-2.5 text-sm font-medium tracking-wide text-cream-100 transition-colors hover:border-gold-300/60 hover:bg-cream-50/10 sm:px-5"
-            aria-label={UI.flashBackToHome}
-          >
-            <HiArrowLongLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
-            <span className="hidden sm:inline">{UI.flashBackToHome}</span>
-          </button>
-        </div>
-      </header>
+    <>
+      <Navbar solid />
+      <div className="relative min-h-screen overflow-hidden bg-maroon-950 text-cream-100">
+        {/* warm sanctum glow + grain */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(60% 40% at 50% -5%, rgba(249,173,85,0.20), transparent 65%), radial-gradient(50% 40% at 100% 100%, rgba(201,161,74,0.12), transparent 70%)',
+          }}
+        />
+        <div aria-hidden className="grain absolute inset-0 opacity-60" />
 
       {/* Hero */}
-      <section className="relative z-10 shell pt-16 text-center sm:pt-24">
+      <section className="relative z-10 shell pt-32 text-center sm:pt-40">
         <span
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-6 -z-0 -translate-x-1/2 select-none font-display leading-none text-gold-400/10 text-[10rem] sm:text-[14rem]"
@@ -207,7 +171,8 @@ export function DailyPooja() {
         </div>
       </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   )
 }

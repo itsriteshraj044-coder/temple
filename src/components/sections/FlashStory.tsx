@@ -90,7 +90,7 @@ export function FlashStory() {
               {group.map((item, i) => (
                 <li key={i} className="flex items-center whitespace-nowrap">
                   <a
-                    href={item.href ?? `#/flash/${item.slug}`}
+                    href={item.href ?? `/flash/${item.slug}`}
                     className="font-serif text-sm text-maroon-900 underline-offset-4 transition-colors hover:text-saffron-600 hover:underline sm:text-[0.95rem]"
                   >
                     {item.label}

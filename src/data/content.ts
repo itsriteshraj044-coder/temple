@@ -414,7 +414,7 @@ const en: Content = {
       href: '#events',
       children: [{ label: 'Community Events', href: '#events' }],
     },
-    { label: 'E-Calendar', href: '#/e-calendar' },
+    { label: 'E-Calendar', href: '/e-calendar' },
     { label: 'How to donate', href: '#donate' },
     {
       label: 'Join Us',
@@ -636,7 +636,7 @@ const en: Content = {
     flashItems: [
       {
         slug: 'canteen-menu',
-        href: '#/canteen-menu',
+        href: '/canteen-menu',
         label: "Sri Ganesha's Canteen Menu",
         body: 'Warm, freshly prepared vegetarian meals are served daily at Sri Ganesha’s Canteen. From tiffin and dosai to full-plate lunches and evening prasadam, every dish is cooked with devotion. Browse the full menu and opening hours below.',
         ctaLabel: 'Go to Canteen',
@@ -644,7 +644,7 @@ const en: Content = {
       },
       {
         slug: 'pooja-times',
-        href: '#/daily-pooja',
+        href: '/daily-pooja',
         label: 'Daily Pooja Times',
         body: 'The sanctum opens daily for darshan and abishegam. Morning and evening poojas follow the timeless Agamic rhythm. Check the current darshan hours so you can plan your visit and receive the deity’s blessings.',
         ctaLabel: 'View Timings',
@@ -652,7 +652,7 @@ const en: Content = {
       },
       {
         slug: 'weekend-abishegam',
-        href: '#/abishegam',
+        href: '/abishegam',
         label: 'Weekend Special Abishegam',
         body: 'Join us each weekend for a special abishegam to Lord Ganesha and Lord Ayyappa — a sacred bathing ritual accompanied by chanting and deeparadhana. All devotees are warmly welcome to participate.',
         ctaLabel: 'See Schedule',
@@ -660,7 +660,7 @@ const en: Content = {
       },
       {
         slug: 'upcoming-festivals',
-        href: '#/festivals',
+        href: '/festivals',
         label: 'Upcoming Festivals & Utsavams',
         body: 'The temple calendar turns with the sacred rhythm of the year — utsavams, homams, pradoshams and observances. Explore what is coming up and mark your family’s festivals in advance.',
         ctaLabel: 'Browse Events',
@@ -719,7 +719,7 @@ const ta: Content = {
       href: '#events',
       children: [{ label: 'சமூக நிகழ்வுகள்', href: '#events' }],
     },
-    { label: 'மின்-நாட்காட்டி', href: '#/e-calendar' },
+    { label: 'மின்-நாட்காட்டி', href: '/e-calendar' },
     { label: 'நன்கொடை', href: '#donate' },
     {
       label: 'இணையுங்கள்',
@@ -941,7 +941,7 @@ const ta: Content = {
     flashItems: [
       {
         slug: 'canteen-menu',
-        href: '#/canteen-menu',
+        href: '/canteen-menu',
         label: 'ஸ்ரீ கணேஷா உணவக பட்டியல்',
         body: 'ஸ்ரீ கணேஷா உணவகத்தில் தினமும் சூடான, புத்தம்புதிதாகச் சமைத்த சைவ உணவு வழங்கப்படுகிறது. டிஃபன், தோசை முதல் முழு மதிய உணவு மற்றும் மாலை பிரசாதம் வரை ஒவ்வொரு உணவும் பக்தியுடன் சமைக்கப்படுகிறது. முழு பட்டியலையும் திறக்கும் நேரத்தையும் கீழே காணுங்கள்.',
         ctaLabel: 'உணவகத்திற்குச் செல்ல',
@@ -949,7 +949,7 @@ const ta: Content = {
       },
       {
         slug: 'pooja-times',
-        href: '#/daily-pooja',
+        href: '/daily-pooja',
         label: 'தினசரி பூஜை நேரங்கள்',
         body: 'கருவறை தினமும் தரிசனம் மற்றும் அபிஷேகத்திற்காகத் திறக்கப்படுகிறது. காலை மற்றும் மாலை பூஜைகள் நித்திய ஆகம முறையைப் பின்பற்றுகின்றன. உங்கள் வருகையைத் திட்டமிட்டு இறைவனின் அருளைப் பெற தற்போதைய தரிசன நேரங்களைப் பாருங்கள்.',
         ctaLabel: 'நேரங்களைக் காண',
@@ -957,7 +957,7 @@ const ta: Content = {
       },
       {
         slug: 'weekend-abishegam',
-        href: '#/abishegam',
+        href: '/abishegam',
         label: 'வார இறுதி சிறப்பு அபிஷேகம்',
         body: 'ஒவ்வொரு வார இறுதியிலும் விநாயகர் மற்றும் ஐயப்பனுக்கு நடைபெறும் சிறப்பு அபிஷேகத்தில் கலந்து கொள்ளுங்கள் — மந்திரம் மற்றும் தீபாராதனையுடன் கூடிய புனித அபிஷேக வழிபாடு. அனைத்து பக்தர்களும் அன்புடன் வரவேற்கப்படுகிறார்கள்.',
         ctaLabel: 'அட்டவணையைக் காண',
@@ -965,7 +965,7 @@ const ta: Content = {
       },
       {
         slug: 'upcoming-festivals',
-        href: '#/festivals',
+        href: '/festivals',
         label: 'வரவிருக்கும் திருவிழாக்கள் & உற்சவங்கள்',
         body: 'ஆண்டின் புனித தாளத்திற்கேற்ப கோயில் நாட்காட்டி சுழல்கிறது — உற்சவங்கள், ஹோமங்கள், பிரதோஷங்கள் மற்றும் வழிபாடுகள். வரவிருக்கும் நிகழ்வுகளை ஆராய்ந்து உங்கள் குடும்பத்தின் திருவிழாக்களை முன்கூட்டியே குறித்துக் கொள்ளுங்கள்.',
         ctaLabel: 'நிகழ்வுகளைக் காண',

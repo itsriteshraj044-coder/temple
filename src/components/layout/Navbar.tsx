@@ -3,22 +3,25 @@ import { AnimatePresence, motion } from 'motion/react'
 import { HiBars3, HiXMark, HiChevronDown } from 'react-icons/hi2'
 import { SITE } from '@/data/content'
 import { scrollToHash } from '@/providers/SmoothScroll'
+import { navigate } from '@/lib/router'
 import { useContent, useLang } from '@/i18n/lang'
 
-export function Navbar() {
+export function Navbar({ solid = false }: { solid?: boolean }) {
   const { NAV, UI } = useContent()
   const { lang } = useLang()
   const isTa = lang === 'ta'
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(solid)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
 
   useEffect(() => {
+    // On standalone pages the bar is always solid; skip the scroll listener.
+    if (solid) return
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [solid])
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -30,6 +33,7 @@ export function Navbar() {
   const go = (href: string) => {
     setOpen(false)
     if (href.startsWith('#')) scrollToHash(href)
+    else navigate(href)
   }
 
   return (

@@ -106,7 +106,7 @@ export function Events() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading eyebrow={EVENTS.eyebrow} title={EVENTS.title} light />
           <div className="flex items-center gap-3">
-            <Button href="#/e-calendar" variant="solid" className="ring-1 ring-gold-400/40">
+            <Button href="/e-calendar" variant="solid" className="ring-1 ring-gold-400/40">
               {EVENTS.calendarCta}
             </Button>
             <button

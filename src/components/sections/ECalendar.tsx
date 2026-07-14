@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
-import { HiArrowLongLeft, HiXMark } from 'react-icons/hi2'
+import { HiXMark } from 'react-icons/hi2'
 import { Img } from '@/components/ui/Img'
 import { Reveal } from '@/components/ui/Reveal'
+import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
-import { SITE, type EventItem } from '@/data/content'
+import { type EventItem } from '@/data/content'
 import { useContent } from '@/i18n/lang'
-import { navigate } from '@/lib/router'
 
 /** Month label like "July 2026" from an ISO start date. */
 function monthLabel(iso: string) {
@@ -60,46 +60,12 @@ export function ECalendar() {
     }
   }, [zoom])
 
-  const goHome = () => navigate('home')
-
   return (
-    <div className="min-h-screen bg-cream-100">
-      {/* Top bar — brand + back to home */}
-      <header className="sticky top-0 z-40 border-b border-maroon-900/10 bg-cream-50/85 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
-        <div className="shell flex items-center justify-between gap-3 py-4">
-          <button
-            type="button"
-            onClick={goHome}
-            className="group flex items-center gap-3"
-            aria-label={`${SITE.name} — home`}
-          >
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-maroon-900 font-display text-xl text-gold-400">
-              ॐ
-            </span>
-            <span className="leading-tight">
-              <span className="block font-display text-[0.8rem] font-semibold text-maroon-900 sm:text-[0.95rem]">
-                Sri Vakrathunda Vinayagar
-              </span>
-              <span className="block text-[0.56rem] uppercase tracking-[0.24em] text-saffron-600 sm:text-[0.62rem] sm:tracking-[0.28em]">
-                Temple · The Basin
-              </span>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={goHome}
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-maroon-900/30 px-3.5 py-2.5 text-sm font-medium tracking-wide text-maroon-900 transition-colors hover:border-maroon-900/60 hover:bg-maroon-900 hover:text-cream-50 sm:px-5"
-            aria-label={UI.backToHome}
-          >
-            <HiArrowLongLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-0.5" />
-            <span className="hidden sm:inline">{UI.backToHome}</span>
-          </button>
-        </div>
-      </header>
-
+    <>
+      <Navbar solid />
+      <div className="min-h-screen bg-cream-100">
       {/* Hero */}
-      <section className="shell pb-10 pt-16 sm:pt-20">
+      <section className="shell pb-10 pt-32 sm:pt-40">
         <Reveal>
           <span className="eyebrow mb-5 inline-flex items-center gap-3 text-saffron-600">
             <span aria-hidden className="h-px w-8 bg-saffron-500/60" />
@@ -246,6 +212,7 @@ export function ECalendar() {
         </AnimatePresence>,
         document.body,
       )}
-    </div>
+      </div>
+    </>
   )
 }

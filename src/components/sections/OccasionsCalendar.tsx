@@ -152,7 +152,7 @@ export function OccasionsCalendar({ variant = 'dark' }: { variant?: Variant }) {
 
       {/* footer link to full calendar */}
       <a
-        href="#/e-calendar"
+        href="/e-calendar"
         className={`group flex items-center justify-center gap-2 border-t px-6 py-4 text-sm font-medium tracking-wide transition-colors ${t.footer}`}
       >
         {EVENTS.calendarCta}

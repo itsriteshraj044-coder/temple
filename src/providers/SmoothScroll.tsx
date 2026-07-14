@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from 'react'
 import Lenis from 'lenis'
 import { gsap, ScrollTrigger, prefersReducedMotion } from '@/lib/gsap'
+import { navigate } from '@/lib/router'
 
 /**
  * Cinematic smooth scrolling via Lenis, kept in lockstep with GSAP
@@ -36,20 +37,20 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   return <>{children}</>
 }
 
-/** Smoothly scroll to an in-page anchor, falling back to native behaviour. */
-export function scrollToHash(hash: string) {
-  // Route hashes (e.g. '#/e-calendar') belong to the hash router, not in-page scroll.
-  if (hash.startsWith('#/')) {
-    window.location.hash = hash.slice(1)
+/** Smoothly scroll to an in-page anchor, or route to an app path. */
+export function scrollToHash(target: string) {
+  // Non-hash targets are route paths (e.g. '/e-calendar') → hand to the router.
+  if (!target.startsWith('#')) {
+    navigate(target)
     return
   }
-  const el = document.querySelector(hash)
+  const el = document.querySelector(target)
   if (!el) {
-    // The target section isn't on this page (e.g. we're on the E-Calendar route).
-    // Navigate back to the homepage, then scroll to it once it has mounted.
-    if (window.location.hash) {
-      window.location.hash = ''
-      setTimeout(() => scrollToHash(hash), 80)
+    // The section isn't on this page (we're on a standalone route). Go back to
+    // the homepage, then scroll to it once it has mounted.
+    if (window.location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => scrollToHash(target), 120)
     }
     return
   }

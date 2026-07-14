@@ -38,7 +38,9 @@ export function Button({
   ariaLabel,
 }: ButtonProps) {
   const handleClick = (e: MouseEvent) => {
-    if (href?.startsWith('#')) {
+    // Intercept in-page anchors (#) and internal route paths (/…) so they
+    // scroll / route within the SPA instead of triggering a full reload.
+    if (href && (href.startsWith('#') || href.startsWith('/'))) {
       e.preventDefault()
       scrollToHash(href)
     }
