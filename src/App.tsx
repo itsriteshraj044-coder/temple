@@ -21,6 +21,8 @@ import { ECalendar } from '@/components/sections/ECalendar'
 import { FlashPage } from '@/components/sections/FlashPage'
 import { DailyPooja } from '@/components/sections/DailyPooja'
 import { CanteenMenu } from '@/components/sections/CanteenMenu'
+import { Abishegam } from '@/components/sections/Abishegam'
+import { Festivals } from '@/components/sections/Festivals'
 import { useRoute } from '@/lib/router'
 import type Lenis from 'lenis'
 
@@ -44,6 +46,10 @@ export default function App() {
         <DailyPooja />
       ) : route === 'canteen-menu' ? (
         <CanteenMenu />
+      ) : route === 'abishegam' ? (
+        <Abishegam />
+      ) : route === 'festivals' ? (
+        <Festivals />
       ) : route === 'flash' ? (
         <FlashPage />
       ) : (

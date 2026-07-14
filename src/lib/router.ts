@@ -7,7 +7,14 @@ import { useEffect, useState } from 'react'
  * handled by `scrollToHash` and never set `window.location.hash`, so they don't
  * collide with these route hashes (which all begin with `#/`).
  */
-export type Route = 'home' | 'e-calendar' | 'flash' | 'daily-pooja' | 'canteen-menu'
+export type Route =
+  | 'home'
+  | 'e-calendar'
+  | 'flash'
+  | 'daily-pooja'
+  | 'canteen-menu'
+  | 'abishegam'
+  | 'festivals'
 
 const FLASH_PREFIX = '#/flash/'
 
@@ -18,6 +25,8 @@ export function parseRoute(): Route {
   if (hash === '#/e-calendar') return 'e-calendar'
   if (hash === '#/daily-pooja') return 'daily-pooja'
   if (hash === '#/canteen-menu') return 'canteen-menu'
+  if (hash === '#/abishegam') return 'abishegam'
+  if (hash === '#/festivals') return 'festivals'
   if (hash.startsWith(FLASH_PREFIX)) return 'flash'
   return 'home'
 }

@@ -41,6 +41,8 @@ export interface FlashItem {
 export interface MenuItem {
   name: string
   price: string
+  /** Optional qualifier shown under the item, e.g. "with Panchalathy". */
+  note?: string
 }
 
 export interface MenuCategory {
@@ -183,6 +185,53 @@ const MENU_SNACKS: MenuItem[] = [
   mi('Gulab Jamoon', '$8.00'), mi('Flat Vadai', '$12.00'), mi('Mysorepak', '$10.00'),
 ]
 
+/**
+ * Pooja / Archanai / Abishegam service list — language-neutral offering names
+ * and prices, sourced verbatim from the temple's published Pooja Service page
+ * (mvhs.org.au). Only the page's headings/labels are translated per language.
+ */
+const mp = (name: string, price: string, note?: string): MenuItem => ({ name, price, note })
+
+const POOJA_ITEMS: MenuItem[] = [
+  mp('Archanai for One Deity', '$10.00'),
+  mp('Archanai for 3 Deities (Sivan, Ambal & Ganesha)', '$20.00', 'with Panchalathy'),
+  mp('Archanai for 5 Deities', '$30.00', 'with Panchalathy'),
+  mp('All Deities Archanai', '$75.00'),
+  mp('Kunkuma Archanai', '$30.00', 'with Panchalathy'),
+  mp('Modcha Archanai', '$30.00'),
+  mp('Navagraha Archanai', '$40.00'),
+  mp('Sahasranama Archanai', '$175.00'),
+  mp('Prasatha Poojai', '$125.00'),
+  mp('Vadamalai Archanai', '$125.00'),
+  mp("Mothaga Poojai 21 No's", '$75.00'),
+  mp("Mothaga Poojai 54 No's", '$150.00'),
+  mp("Mothaga Poojai 108 No's", '$250.00'),
+  mp('Car Poojai', '$75.00', 'with Gift'),
+  mp('Each Lamp (Ghee or Sani)', '$6.00'),
+  mp('Birthday Archanai for 3 Deities', '$50.00', 'with Gift'),
+  mp('Ganapathy Homam at Temple', '$400.00'),
+  mp('Ayushya Homam at Temple', '$400.00'),
+  mp('Navagraha Homam at Temple', '$450.00'),
+  mp('Raghu & Kaethu Archanai', '$15.00'),
+  mp('Thedchanmoorthy and Guru', '$15.00'),
+  mp('Herania Stratham', '$75.00', 'with Box Prasatham'),
+  mp('First Birthday Special Archanai', '$51.00', 'with Gift'),
+  mp('Namakarnam', '$75.00', 'with Gift'),
+  mp('Thivasam at Temple', '$150.00'),
+  mp('Thivasam at Home', '$250.00'),
+  mp('Punniyathanam', '$250.00'),
+  mp('Ganapathy Homam at Home / GrahaPravesham', '$450.00'),
+  mp('Ayushya Homam at Home', '$450.00'),
+  mp('Navagraha Homam at Home', '$500.00'),
+  mp('Vidyaarambam', '$75.00', 'with Box Prasatham'),
+  mp('Anna Prasanam', '$125.00', 'with Prasatham'),
+  mp('Abishegam for Per Deity', '$200.00'),
+  mp('Abishegam for Navagraham', '$250.00'),
+  mp('Pradosham', '$75.00', '$100 Sani Pradosham'),
+  mp('Vennai Kappu for Anjaneyar', '$150.00', 'with Prasatham'),
+  mp('Santhana Kappu for Any One Deity', '$200.00', 'with Prasatham'),
+]
+
 export interface Content {
   NAV: NavItem[]
   ABOUT: {
@@ -207,6 +256,19 @@ export interface Content {
     intro: string
     hoursTitle: string
     categories: MenuCategory[]
+  }
+  POOJA_SERVICE: {
+    eyebrow: string
+    title: string
+    intro: string
+    contactLabel: string
+    hoursTitle: string
+    items: MenuItem[]
+  }
+  FESTIVALS: {
+    eyebrow: string
+    title: string
+    intro: string
   }
   EVENTS: {
     eyebrow: string
@@ -442,6 +504,21 @@ const en: Content = {
       { name: 'Snacks & Desserts', items: MENU_SNACKS },
     ],
   },
+  POOJA_SERVICE: {
+    eyebrow: 'Services & Offerings',
+    title: 'Poojas, Archanai & Abishegam',
+    intro:
+      'Archanai, abishegam, homam and personal poojas performed by our priests with full Agamic tradition — for health, prosperity and peace. Weekend special abishegams welcome all devotees.',
+    contactLabel: 'For inquiries & bookings',
+    hoursTitle: 'Temple Open',
+    items: POOJA_ITEMS,
+  },
+  FESTIVALS: {
+    eyebrow: 'Festivals & Utsavams',
+    title: 'Upcoming festivals & sacred observances',
+    intro:
+      'The temple calendar turns with the sacred rhythm of the year — utsavams, abishegams, homams and observances. All devotees are warmly welcome to join.',
+  },
   EVENTS: {
     eyebrow: 'Upcoming Events',
     title: 'Festivals & sacred observances',
@@ -575,6 +652,7 @@ const en: Content = {
       },
       {
         slug: 'weekend-abishegam',
+        href: '#/abishegam',
         label: 'Weekend Special Abishegam',
         body: 'Join us each weekend for a special abishegam to Lord Ganesha and Lord Ayyappa — a sacred bathing ritual accompanied by chanting and deeparadhana. All devotees are warmly welcome to participate.',
         ctaLabel: 'See Schedule',
@@ -582,6 +660,7 @@ const en: Content = {
       },
       {
         slug: 'upcoming-festivals',
+        href: '#/festivals',
         label: 'Upcoming Festivals & Utsavams',
         body: 'The temple calendar turns with the sacred rhythm of the year — utsavams, homams, pradoshams and observances. Explore what is coming up and mark your family’s festivals in advance.',
         ctaLabel: 'Browse Events',
@@ -730,6 +809,21 @@ const ta: Content = {
       { name: 'தின்பண்டங்கள் & இனிப்புகள்', items: MENU_SNACKS },
     ],
   },
+  POOJA_SERVICE: {
+    eyebrow: 'சேவைகளும் காணிக்கைகளும்',
+    title: 'பூஜைகள், அர்ச்சனை & அபிஷேகம்',
+    intro:
+      'ஆரோக்கியம், செழிப்பு மற்றும் அமைதிக்காக முழு ஆகம மரபுடன் எங்கள் அர்ச்சகர்களால் செய்யப்படும் அர்ச்சனை, அபிஷேகம், ஹோமம் மற்றும் தனிப்பட்ட பூஜைகள். வார இறுதி சிறப்பு அபிஷேகங்களில் அனைத்து பக்தர்களும் வரவேற்கப்படுகிறார்கள்.',
+    contactLabel: 'விசாரணை & முன்பதிவுகளுக்கு',
+    hoursTitle: 'கோயில் திறந்திருக்கும்',
+    items: POOJA_ITEMS,
+  },
+  FESTIVALS: {
+    eyebrow: 'திருவிழாக்களும் உற்சவங்களும்',
+    title: 'வரவிருக்கும் திருவிழாக்களும் புனித வழிபாடுகளும்',
+    intro:
+      'ஆண்டின் புனித தாளத்திற்கேற்ப கோயில் நாட்காட்டி சுழல்கிறது — உற்சவங்கள், அபிஷேகங்கள், ஹோமங்கள் மற்றும் வழிபாடுகள். அனைத்து பக்தர்களும் அன்புடன் வரவேற்கப்படுகிறார்கள்.',
+  },
   EVENTS: {
     eyebrow: 'வரவிருக்கும் நிகழ்வுகள்',
     title: 'திருவிழாக்களும் புனித வழிபாடுகளும்',
@@ -863,6 +957,7 @@ const ta: Content = {
       },
       {
         slug: 'weekend-abishegam',
+        href: '#/abishegam',
         label: 'வார இறுதி சிறப்பு அபிஷேகம்',
         body: 'ஒவ்வொரு வார இறுதியிலும் விநாயகர் மற்றும் ஐயப்பனுக்கு நடைபெறும் சிறப்பு அபிஷேகத்தில் கலந்து கொள்ளுங்கள் — மந்திரம் மற்றும் தீபாராதனையுடன் கூடிய புனித அபிஷேக வழிபாடு. அனைத்து பக்தர்களும் அன்புடன் வரவேற்கப்படுகிறார்கள்.',
         ctaLabel: 'அட்டவணையைக் காண',
@@ -870,6 +965,7 @@ const ta: Content = {
       },
       {
         slug: 'upcoming-festivals',
+        href: '#/festivals',
         label: 'வரவிருக்கும் திருவிழாக்கள் & உற்சவங்கள்',
         body: 'ஆண்டின் புனித தாளத்திற்கேற்ப கோயில் நாட்காட்டி சுழல்கிறது — உற்சவங்கள், ஹோமங்கள், பிரதோஷங்கள் மற்றும் வழிபாடுகள். வரவிருக்கும் நிகழ்வுகளை ஆராய்ந்து உங்கள் குடும்பத்தின் திருவிழாக்களை முன்கூட்டியே குறித்துக் கொள்ளுங்கள்.',
         ctaLabel: 'நிகழ்வுகளைக் காண',
