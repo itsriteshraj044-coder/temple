@@ -5,6 +5,8 @@ import { BackgroundMusic } from '@/components/ui/BackgroundMusic'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
+import { FlashStory } from '@/components/sections/FlashStory'
+import { QuickInfo } from '@/components/sections/QuickInfo'
 import { About } from '@/components/sections/About'
 import { History } from '@/components/sections/History'
 import { Services } from '@/components/sections/Services'
@@ -16,6 +18,7 @@ import { Join } from '@/components/sections/Join'
 import { Gallery } from '@/components/sections/Gallery'
 import { Contact } from '@/components/sections/Contact'
 import { ECalendar } from '@/components/sections/ECalendar'
+import { FlashPage } from '@/components/sections/FlashPage'
 import { useRoute } from '@/lib/router'
 import type Lenis from 'lenis'
 
@@ -35,11 +38,15 @@ export default function App() {
       <BackgroundMusic />
       {route === 'e-calendar' ? (
         <ECalendar />
+      ) : route === 'flash' ? (
+        <FlashPage />
       ) : (
         <>
           <Navbar />
           <main id="top">
             <Hero />
+            <FlashStory />
+            <QuickInfo />
             <About />
             <History />
             <Services />

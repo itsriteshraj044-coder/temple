@@ -23,6 +23,19 @@ export interface ServiceItem {
   description: string
 }
 
+export interface FlashItem {
+  /** Language-neutral URL slug, e.g. 'canteen-menu' → #/flash/canteen-menu */
+  slug: string
+  /** Headline shown in the ticker and as the page title. */
+  label: string
+  /** Body copy shown on the item's own page. */
+  body: string
+  /** Label for the button linking to the related homepage section. */
+  ctaLabel: string
+  /** In-page anchor for the related section, e.g. '#canteen'. */
+  ctaHref: string
+}
+
 export interface EventItem {
   title: string
   /** Human-readable date shown on the card. */
@@ -193,6 +206,15 @@ export interface Content {
     titleLine1: string
     titleLine2: string
     titleLine3: string
+    flashLabel: string
+    flashItems: FlashItem[]
+    flashRead: string
+    flashBackToHome: string
+    quickEyebrow: string
+    quickTitle: string
+    quickTempleHours: string
+    quickCanteenTimings: string
+    quickCanteenPhone: string
   }
 }
 
@@ -404,6 +426,44 @@ const en: Content = {
     titleLine1: 'Sri Vakrathunda',
     titleLine2: 'Vinayagar',
     titleLine3: 'Temple',
+    flashLabel: 'Flash Story',
+    flashItems: [
+      {
+        slug: 'canteen-menu',
+        label: "Sri Ganesha's Canteen Menu",
+        body: 'Warm, freshly prepared vegetarian meals are served daily at Sri Ganesha’s Canteen. From tiffin and dosai to full-plate lunches and evening prasadam, every dish is cooked with devotion. Browse the full menu and opening hours below.',
+        ctaLabel: 'Go to Canteen',
+        ctaHref: '#canteen',
+      },
+      {
+        slug: 'pooja-times',
+        label: 'Daily Pooja Times',
+        body: 'The sanctum opens daily for darshan and abishegam. Morning and evening poojas follow the timeless Agamic rhythm. Check the current darshan hours so you can plan your visit and receive the deity’s blessings.',
+        ctaLabel: 'View Timings',
+        ctaHref: '#timings',
+      },
+      {
+        slug: 'weekend-abishegam',
+        label: 'Weekend Special Abishegam',
+        body: 'Join us each weekend for a special abishegam to Lord Ganesha and Lord Ayyappa — a sacred bathing ritual accompanied by chanting and deeparadhana. All devotees are warmly welcome to participate.',
+        ctaLabel: 'See Schedule',
+        ctaHref: '#timings',
+      },
+      {
+        slug: 'upcoming-festivals',
+        label: 'Upcoming Festivals & Utsavams',
+        body: 'The temple calendar turns with the sacred rhythm of the year — utsavams, homams, pradoshams and observances. Explore what is coming up and mark your family’s festivals in advance.',
+        ctaLabel: 'Browse Events',
+        ctaHref: '#events',
+      },
+    ],
+    flashRead: 'Related section',
+    flashBackToHome: 'Back to Home',
+    quickEyebrow: 'At a Glance',
+    quickTitle: 'Hours & Timings',
+    quickTempleHours: 'Temple Hours',
+    quickCanteenTimings: "Sri Ganesha's Canteen Timings",
+    quickCanteenPhone: 'Canteen Phone',
   },
 }
 
@@ -615,6 +675,44 @@ const ta: Content = {
     titleLine1: 'ஸ்ரீ வக்ரதுண்ட',
     titleLine2: 'விநாயகர்',
     titleLine3: 'கோயில்',
+    flashLabel: 'செய்தி ஓட்டம்',
+    flashItems: [
+      {
+        slug: 'canteen-menu',
+        label: 'ஸ்ரீ கணேஷா உணவக பட்டியல்',
+        body: 'ஸ்ரீ கணேஷா உணவகத்தில் தினமும் சூடான, புத்தம்புதிதாகச் சமைத்த சைவ உணவு வழங்கப்படுகிறது. டிஃபன், தோசை முதல் முழு மதிய உணவு மற்றும் மாலை பிரசாதம் வரை ஒவ்வொரு உணவும் பக்தியுடன் சமைக்கப்படுகிறது. முழு பட்டியலையும் திறக்கும் நேரத்தையும் கீழே காணுங்கள்.',
+        ctaLabel: 'உணவகத்திற்குச் செல்ல',
+        ctaHref: '#canteen',
+      },
+      {
+        slug: 'pooja-times',
+        label: 'தினசரி பூஜை நேரங்கள்',
+        body: 'கருவறை தினமும் தரிசனம் மற்றும் அபிஷேகத்திற்காகத் திறக்கப்படுகிறது. காலை மற்றும் மாலை பூஜைகள் நித்திய ஆகம முறையைப் பின்பற்றுகின்றன. உங்கள் வருகையைத் திட்டமிட்டு இறைவனின் அருளைப் பெற தற்போதைய தரிசன நேரங்களைப் பாருங்கள்.',
+        ctaLabel: 'நேரங்களைக் காண',
+        ctaHref: '#timings',
+      },
+      {
+        slug: 'weekend-abishegam',
+        label: 'வார இறுதி சிறப்பு அபிஷேகம்',
+        body: 'ஒவ்வொரு வார இறுதியிலும் விநாயகர் மற்றும் ஐயப்பனுக்கு நடைபெறும் சிறப்பு அபிஷேகத்தில் கலந்து கொள்ளுங்கள் — மந்திரம் மற்றும் தீபாராதனையுடன் கூடிய புனித அபிஷேக வழிபாடு. அனைத்து பக்தர்களும் அன்புடன் வரவேற்கப்படுகிறார்கள்.',
+        ctaLabel: 'அட்டவணையைக் காண',
+        ctaHref: '#timings',
+      },
+      {
+        slug: 'upcoming-festivals',
+        label: 'வரவிருக்கும் திருவிழாக்கள் & உற்சவங்கள்',
+        body: 'ஆண்டின் புனித தாளத்திற்கேற்ப கோயில் நாட்காட்டி சுழல்கிறது — உற்சவங்கள், ஹோமங்கள், பிரதோஷங்கள் மற்றும் வழிபாடுகள். வரவிருக்கும் நிகழ்வுகளை ஆராய்ந்து உங்கள் குடும்பத்தின் திருவிழாக்களை முன்கூட்டியே குறித்துக் கொள்ளுங்கள்.',
+        ctaLabel: 'நிகழ்வுகளைக் காண',
+        ctaHref: '#events',
+      },
+    ],
+    flashRead: 'தொடர்புடைய பகுதி',
+    flashBackToHome: 'முகப்புக்குத் திரும்ப',
+    quickEyebrow: 'ஒரு பார்வையில்',
+    quickTitle: 'நேரங்களும் வேளைகளும்',
+    quickTempleHours: 'கோயில் நேரம்',
+    quickCanteenTimings: 'ஸ்ரீ கணேஷா உணவக நேரம்',
+    quickCanteenPhone: 'உணவக தொலைபேசி',
   },
 }
 

@@ -335,6 +335,31 @@
 }
 
 /* ----------------------------------------------------------------------------
+   Flash Story ticker — a seamless right-to-left scrolling headline strip
+   between the hero and the About section. The track holds two identical copies
+   of the item list; translating it by -50% loops without a visible seam.
+   ------------------------------------------------------------------------- */
+.flash-track {
+  animation: flash-scroll 32s linear infinite;
+}
+.flash-strip:hover .flash-track {
+  animation-play-state: paused;
+}
+@keyframes flash-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flash-track {
+    animation: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
    Mid-width display type trim.
    A 1920px monitor at Windows 125% scaling presents a ~1536px display, where
    the editorial type felt oversized, so we trim the big headings and labels a
