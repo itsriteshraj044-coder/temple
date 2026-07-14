@@ -61,7 +61,9 @@ function groupByMonth(items: EventItem[]) {
 export function DailyPooja() {
   const { DAILY_POOJA, EVENTS, UI } = useContent()
   const goHome = () => navigate('home')
-  const groups = groupByMonth(EVENTS.items)
+  // Latest first: sort by ISO start date descending, then group by month.
+  const ordered = [...EVENTS.items].sort((a, b) => b.start.localeCompare(a.start))
+  const groups = groupByMonth(ordered)
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-maroon-950 text-cream-100">
@@ -239,8 +241,9 @@ export function DailyPooja() {
                     </div>
                   </div>
 
-                  {/* scrollable occasion list */}
-                  <div className="max-h-[34rem] overflow-y-auto">
+                  {/* scrollable occasion list — data-lenis-prevent lets it
+                      scroll natively instead of Lenis hijacking the wheel */}
+                  <div data-lenis-prevent className="max-h-[34rem] overflow-y-auto overscroll-contain">
                     {groups.map((group) => (
                       <div key={group.label}>
                         <h3 className="sticky top-0 z-10 bg-maroon-950/90 px-6 py-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
