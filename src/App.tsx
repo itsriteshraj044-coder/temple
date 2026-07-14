@@ -19,6 +19,7 @@ import { Gallery } from '@/components/sections/Gallery'
 import { Contact } from '@/components/sections/Contact'
 import { ECalendar } from '@/components/sections/ECalendar'
 import { FlashPage } from '@/components/sections/FlashPage'
+import { DailyPooja } from '@/components/sections/DailyPooja'
 import { useRoute } from '@/lib/router'
 import type Lenis from 'lenis'
 
@@ -38,6 +39,8 @@ export default function App() {
       <BackgroundMusic />
       {route === 'e-calendar' ? (
         <ECalendar />
+      ) : route === 'daily-pooja' ? (
+        <DailyPooja />
       ) : route === 'flash' ? (
         <FlashPage />
       ) : (

@@ -26,6 +26,8 @@ export interface ServiceItem {
 export interface FlashItem {
   /** Language-neutral URL slug, e.g. 'canteen-menu' → #/flash/canteen-menu */
   slug: string
+  /** Optional dedicated route to open instead of the generic flash page. */
+  href?: string
   /** Headline shown in the ticker and as the page title. */
   label: string
   /** Body copy shown on the item's own page. */
@@ -60,6 +62,8 @@ export const SITE = {
   phoneHref: 'tel:+61404099444',
   canteenPhone: '0452 601 292',
   canteenPhoneHref: 'tel:0452601292',
+  officePhone: '0436 001 881',
+  officePhoneHref: 'tel:0436001881',
   email: 'info@mvhs.org.au',
   social: {
     youtube: 'https://www.youtube.com/',
@@ -143,6 +147,21 @@ export interface Content {
     title: string
     note: string
     schedule: { day: string; sessions: string[] }[]
+  }
+  DAILY_POOJA: {
+    eyebrow: string
+    title: string
+    intro: string
+    items: {
+      time: string
+      name: string
+      tag?: string
+      period: 'dawn' | 'morning' | 'noon' | 'night'
+    }[]
+    bookingText: string
+    officeLabel: string
+    hoursTitle: string
+    hoursLines: string[]
   }
   DONATE: { eyebrow: string; title: string; body: string; cta: string }
   JOIN: {
@@ -350,6 +369,26 @@ const en: Content = {
       { day: 'Weekends & Public Holidays', sessions: ['7:00 am – 1:00 pm', '4:30 pm – 9:00 pm'] },
     ],
   },
+  DAILY_POOJA: {
+    eyebrow: 'Daily Rituals',
+    title: 'Daily Pooja Times',
+    intro:
+      'The sacred rhythm of each day at the temple — from the dawn milk abishekam to the night arththa jaama pooja. All devotees are warmly welcome to receive the blessings of the deities.',
+    items: [
+      { time: '7:15 am', name: 'Daily Milk Abishekam', period: 'dawn' },
+      { time: '8:00 am', name: 'Morning Daily Pooja', period: 'morning' },
+      { time: '12:00 pm', name: 'Uchchi Kaala Pooja', tag: 'Weekdays', period: 'noon' },
+      { time: '1:00 pm', name: 'Uchchi Kaala Pooja', tag: 'Weekends', period: 'noon' },
+      { time: '9:00 pm', name: 'Arththa Jaama Pooja', period: 'night' },
+    ],
+    bookingText: 'Abhishekams or special pooja bookings',
+    officeLabel: 'Temple Office',
+    hoursTitle: 'Temple Open',
+    hoursLines: [
+      'Weekdays · 7:00 am – 12:00 pm · 6:00 pm – 9:00 pm',
+      'Weekends & Public Holidays · 7:00 am – 1:00 pm · 4:30 pm – 9:00 pm',
+    ],
+  },
   DONATE: {
     eyebrow: 'How to Donate',
     title: 'Support the seva',
@@ -437,6 +476,7 @@ const en: Content = {
       },
       {
         slug: 'pooja-times',
+        href: '#/daily-pooja',
         label: 'Daily Pooja Times',
         body: 'The sanctum opens daily for darshan and abishegam. Morning and evening poojas follow the timeless Agamic rhythm. Check the current darshan hours so you can plan your visit and receive the deity’s blessings.',
         ctaLabel: 'View Timings',
@@ -599,6 +639,26 @@ const ta: Content = {
       { day: 'வார இறுதி & பொது விடுமுறை', sessions: ['7:00 am – 1:00 pm', '4:30 pm – 9:00 pm'] },
     ],
   },
+  DAILY_POOJA: {
+    eyebrow: 'தினசரி வழிபாடுகள்',
+    title: 'தினசரி பூஜை நேரங்கள்',
+    intro:
+      'கோயிலின் ஒவ்வொரு நாளின் புனித தாளம் — காலை பால் அபிஷேகம் முதல் இரவு அர்த்தஜாம பூஜை வரை. இறைவனின் அருளைப் பெற அனைத்து பக்தர்களும் அன்புடன் வரவேற்கப்படுகிறார்கள்.',
+    items: [
+      { time: '7:15 am', name: 'தினசரி பால் அபிஷேகம்', period: 'dawn' },
+      { time: '8:00 am', name: 'காலை தினசரி பூஜை', period: 'morning' },
+      { time: '12:00 pm', name: 'உச்சிக்கால பூஜை', tag: 'வார நாட்கள்', period: 'noon' },
+      { time: '1:00 pm', name: 'உச்சிக்கால பூஜை', tag: 'வார இறுதி', period: 'noon' },
+      { time: '9:00 pm', name: 'அர்த்தஜாம பூஜை', period: 'night' },
+    ],
+    bookingText: 'அபிஷேகங்கள் அல்லது சிறப்பு பூஜை முன்பதிவுகள்',
+    officeLabel: 'கோயில் அலுவலகம்',
+    hoursTitle: 'கோயில் திறந்திருக்கும்',
+    hoursLines: [
+      'வார நாட்கள் · 7:00 am – 12:00 pm · 6:00 pm – 9:00 pm',
+      'வார இறுதி & பொது விடுமுறை · 7:00 am – 1:00 pm · 4:30 pm – 9:00 pm',
+    ],
+  },
   DONATE: {
     eyebrow: 'நன்கொடை வழங்குவது எப்படி',
     title: 'சேவையை ஆதரியுங்கள்',
@@ -686,6 +746,7 @@ const ta: Content = {
       },
       {
         slug: 'pooja-times',
+        href: '#/daily-pooja',
         label: 'தினசரி பூஜை நேரங்கள்',
         body: 'கருவறை தினமும் தரிசனம் மற்றும் அபிஷேகத்திற்காகத் திறக்கப்படுகிறது. காலை மற்றும் மாலை பூஜைகள் நித்திய ஆகம முறையைப் பின்பற்றுகின்றன. உங்கள் வருகையைத் திட்டமிட்டு இறைவனின் அருளைப் பெற தற்போதைய தரிசன நேரங்களைப் பாருங்கள்.',
         ctaLabel: 'நேரங்களைக் காண',

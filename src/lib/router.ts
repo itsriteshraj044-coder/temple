@@ -7,13 +7,16 @@ import { useEffect, useState } from 'react'
  * handled by `scrollToHash` and never set `window.location.hash`, so they don't
  * collide with these route hashes (which all begin with `#/`).
  */
-export type Route = 'home' | 'e-calendar' | 'flash'
+export type Route = 'home' | 'e-calendar' | 'flash' | 'daily-pooja'
 
 const FLASH_PREFIX = '#/flash/'
 
 export function parseRoute(): Route {
-  const hash = window.location.hash
+  // Normalise: drop any trailing slash and query/extra so '#/daily-pooja/' and
+  // '#/daily-pooja' resolve the same, and stray characters don't break routing.
+  const hash = window.location.hash.replace(/\/+$/, '')
   if (hash === '#/e-calendar') return 'e-calendar'
+  if (hash === '#/daily-pooja') return 'daily-pooja'
   if (hash.startsWith(FLASH_PREFIX)) return 'flash'
   return 'home'
 }
