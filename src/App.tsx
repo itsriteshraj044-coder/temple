@@ -20,6 +20,7 @@ import { Contact } from '@/components/sections/Contact'
 import { ECalendar } from '@/components/sections/ECalendar'
 import { FlashPage } from '@/components/sections/FlashPage'
 import { DailyPooja } from '@/components/sections/DailyPooja'
+import { CanteenMenu } from '@/components/sections/CanteenMenu'
 import { useRoute } from '@/lib/router'
 import type Lenis from 'lenis'
 
@@ -41,6 +42,8 @@ export default function App() {
         <ECalendar />
       ) : route === 'daily-pooja' ? (
         <DailyPooja />
+      ) : route === 'canteen-menu' ? (
+        <CanteenMenu />
       ) : route === 'flash' ? (
         <FlashPage />
       ) : (

@@ -1,7 +1,6 @@
 import type { ComponentType, SVGProps } from 'react'
 import {
   HiArrowLongLeft,
-  HiOutlineCalendarDays,
   HiOutlineClock,
   HiOutlineMoon,
   HiOutlinePhone,
@@ -11,7 +10,8 @@ import {
 } from 'react-icons/hi2'
 import { Reveal } from '@/components/ui/Reveal'
 import { Footer } from '@/components/layout/Footer'
-import { SITE, type EventItem } from '@/data/content'
+import { OccasionsCalendar } from '@/components/sections/OccasionsCalendar'
+import { SITE } from '@/data/content'
 import { useContent } from '@/i18n/lang'
 import { navigate } from '@/lib/router'
 
@@ -25,32 +25,6 @@ const PERIOD: Record<Period, { Icon: ComponentType<SVGProps<SVGSVGElement>>; acc
   night: { Icon: HiOutlineMoon, accent: 'text-gold-400' },
 }
 
-/** A compact day/month badge from an ISO start date (e.g. "03" / "Jul"). */
-function dateBadge(iso: string) {
-  const d = new Date(`${iso}T00:00:00`)
-  return {
-    day: d.toLocaleDateString('en-AU', { day: '2-digit' }),
-    mon: d.toLocaleDateString('en-AU', { month: 'short' }),
-  }
-}
-
-/** Month heading like "July 2026" from an ISO start date. */
-function monthLabel(iso: string) {
-  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })
-}
-
-/** Group ordered events into [month, events] buckets, preserving order. */
-function groupByMonth(items: EventItem[]) {
-  const groups: { label: string; events: EventItem[] }[] = []
-  for (const e of items) {
-    const label = monthLabel(e.start)
-    const last = groups[groups.length - 1]
-    if (last && last.label === label) last.events.push(e)
-    else groups.push({ label, events: [e] })
-  }
-  return groups
-}
-
 /**
  * Standalone premium page for the temple's Daily Pooja Times (route
  * `#/daily-pooja`, linked from the Flash Story ticker). The schedule is
@@ -59,11 +33,8 @@ function groupByMonth(items: EventItem[]) {
  * right side. Content renders bilingually from the shared content tree.
  */
 export function DailyPooja() {
-  const { DAILY_POOJA, EVENTS, UI } = useContent()
+  const { DAILY_POOJA, UI } = useContent()
   const goHome = () => navigate('home')
-  // Latest first: sort by ISO start date descending, then group by month.
-  const ordered = [...EVENTS.items].sort((a, b) => b.start.localeCompare(a.start))
-  const groups = groupByMonth(ordered)
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-maroon-950 text-cream-100">
@@ -227,67 +198,7 @@ export function DailyPooja() {
           <aside className="lg:col-span-5 xl:col-span-4">
             <Reveal delay={0.1}>
               <div className="lg:sticky lg:top-24">
-                <div className="overflow-hidden rounded-3xl border border-gold-400/20 bg-cream-50/[0.04] backdrop-blur-sm">
-                  {/* header */}
-                  <div className="flex items-center gap-3 border-b border-gold-400/15 bg-gradient-to-r from-gold-400/10 to-transparent px-6 py-5">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold-400/15 ring-1 ring-gold-400/30">
-                      <HiOutlineCalendarDays className="h-5 w-5 text-gold-300" />
-                    </span>
-                    <div>
-                      <h2 className="font-display text-lg text-cream-50">{EVENTS.eyebrow}</h2>
-                      <p className="text-[0.62rem] uppercase tracking-[0.22em] text-gold-300/70">
-                        {UI.calYear}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* scrollable occasion list — data-lenis-prevent lets it
-                      scroll natively instead of Lenis hijacking the wheel */}
-                  <div data-lenis-prevent className="max-h-[34rem] overflow-y-auto overscroll-contain">
-                    {groups.map((group) => (
-                      <div key={group.label}>
-                        <h3 className="sticky top-0 z-10 bg-maroon-950/90 px-6 py-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
-                          {group.label}
-                        </h3>
-                        <ul>
-                          {group.events.map((e) => {
-                            const b = dateBadge(e.start)
-                            return (
-                              <li
-                                key={`${e.start}-${e.title}`}
-                                className="flex items-center gap-4 border-t border-gold-400/10 px-6 py-3.5 first:border-t-0"
-                              >
-                                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-gold-400/25 bg-maroon-900 leading-none">
-                                  <span className="font-display text-lg text-cream-50">{b.day}</span>
-                                  <span className="mt-0.5 text-[0.58rem] uppercase tracking-[0.14em] text-gold-300">
-                                    {b.mon}
-                                  </span>
-                                </div>
-                                <div className="min-w-0">
-                                  <h4 className="truncate font-serif text-[0.98rem] text-cream-50">
-                                    {e.title}
-                                  </h4>
-                                  <span className="text-[0.7rem] uppercase tracking-[0.14em] text-saffron-300/90">
-                                    {e.category}
-                                  </span>
-                                </div>
-                              </li>
-                            )
-                          })}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* footer link to full calendar */}
-                  <a
-                    href="#/e-calendar"
-                    className="group flex items-center justify-center gap-2 border-t border-gold-400/15 px-6 py-4 text-sm font-medium tracking-wide text-gold-300 transition-colors hover:bg-gold-400/10 hover:text-gilded"
-                  >
-                    {EVENTS.calendarCta}
-                    <HiArrowLongLeft className="h-4 w-4 rotate-180 transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </a>
-                </div>
+                <OccasionsCalendar variant="dark" />
               </div>
             </Reveal>
           </aside>

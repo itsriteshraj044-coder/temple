@@ -38,6 +38,16 @@ export interface FlashItem {
   ctaHref: string
 }
 
+export interface MenuItem {
+  name: string
+  price: string
+}
+
+export interface MenuCategory {
+  name: string
+  items: MenuItem[]
+}
+
 export interface EventItem {
   title: string
   /** Human-readable date shown on the card. */
@@ -65,6 +75,8 @@ export const SITE = {
   officePhone: '0436 001 881',
   officePhoneHref: 'tel:0436001881',
   email: 'info@mvhs.org.au',
+  canteenEmail: 'Canteen@mvhs.org.au',
+  canteenEmailHref: 'mailto:Canteen@mvhs.org.au',
   social: {
     youtube: 'https://www.youtube.com/',
     facebook: 'https://www.facebook.com/',
@@ -117,6 +129,60 @@ const EVENT_ITEMS_TA: EventItem[] = [
   { title: 'ஆடி பௌர்ணமி உற்சவம்', date: '29 July 2026', category: 'உற்சவம்', img: ev('aani-karthikai-utsavam'), start: '2026-07-29' },
 ]
 
+/**
+ * Sri Ganesha's Canteen menu — item names and prices are language-neutral menu
+ * facts (like the event posters), so they live here once and are reused by both
+ * languages; only the category headings are translated. Sourced verbatim from
+ * the temple's published menu (mvhs.org.au).
+ */
+const mi = (name: string, price: string): MenuItem => ({ name, price })
+
+const MENU_DOSA: MenuItem[] = [
+  mi('Plain Dosai', '$9.00'), mi('Plain Roast', '$10.00'), mi('Cheese', '$10.00'),
+  mi('Chili Masala', '$14.00'), mi('Chili Onion Masala', '$15.00'), mi('Chili Onion', '$13.00'),
+  mi('Chili Paneer', '$14.00'), mi('Chili', '$10.00'), mi('Ghee', '$10.00'),
+  mi('Ghee Masala', '$13.00'), mi('Ghee Roast', '$11.00'), mi('Masala', '$13.00'),
+  mi('Onion', '$11.00'), mi('Paneer', '$12.00'), mi('Paneer Masala', '$15.00'),
+  mi('Podi', '$10.00'), mi('Kal', '$9.00'), mi('Cone', '$11.00'),
+  mi('Podi Masala', '$13.00'), mi('Onion Masala', '$14.00'), mi('Ghee Onion', '$13.00'),
+  mi('Sweet', '$9.00'), mi('Rava', '$12.00'), mi('Ghee Rava', '$13.00'),
+  mi('Onion Rava', '$13.00'), mi('Ghee Onion Rava', '$14.00'),
+]
+
+const MENU_DEALS: MenuItem[] = [
+  mi('2 Idlis and Vadai', '$12.00'),
+  mi('Biriyani (With Kurma and Raitha)', '$15.00'),
+  mi('Thali – Regular Meals', '$16.00'),
+  mi('Special Thali', '$22.00'),
+  mi('Mini Tiffen', '$16.00'),
+]
+
+const MENU_DRINKS: MenuItem[] = [
+  mi('Mango Lassi Cup', '$6.00'), mi('Soft Drink Can / Water Bottle', '$3.00'),
+  mi('Coffee', '$4.00'), mi('Tea', '$4.00'), mi('Masala Tea', '$4.00'),
+]
+
+const MENU_UTHAPAM: MenuItem[] = [
+  mi('Plain', '$12.00'), mi('Chilli', '$12.00'), mi('Onion', '$12.00'), mi('Tomato', '$12.00'),
+  mi('Paneer', '$12.00'), mi('Mixed Veg', '$12.00'), mi('Ghee', '$12.00'), mi('Podi', '$12.00'),
+]
+
+const MENU_VADAI: MenuItem[] = [
+  mi('Urid Vadai set', '$6.00'), mi('Sambar Vadai set', '$7.00'), mi('Masala Vadai set', '$6.00'),
+]
+
+const MENU_MAINS: MenuItem[] = [mi('Idly set (3pcs)', '$11.00'), mi('Poori set (3pcs)', '$12.00')]
+
+const MENU_SPECIAL: MenuItem[] = [
+  mi('Paratta', '$13.00'), mi('Kothu roti', '$13.00'), mi('Noodles', '$11.00'),
+  mi('Pongal only', '$10.00'), mi('Pongal deal', '$13.00'),
+]
+
+const MENU_SNACKS: MenuItem[] = [
+  mi('Laddu bag / box', '$8.00'), mi('Mixture Box', '$8.00'), mi('Kesari box / bag', '$8.00'),
+  mi('Gulab Jamoon', '$8.00'), mi('Flat Vadai', '$12.00'), mi('Mysorepak', '$10.00'),
+]
+
 export interface Content {
   NAV: NavItem[]
   ABOUT: {
@@ -134,6 +200,13 @@ export interface Content {
     body: string
     phoneLabel: string
     hours: { day: string; time: string }[]
+  }
+  CANTEEN_MENU: {
+    eyebrow: string
+    title: string
+    intro: string
+    hoursTitle: string
+    categories: MenuCategory[]
   }
   EVENTS: {
     eyebrow: string
@@ -352,6 +425,23 @@ const en: Content = {
       { day: 'Dinner', time: '5:00 pm – 9:00 pm' },
     ],
   },
+  CANTEEN_MENU: {
+    eyebrow: 'Prasadam & Vegetarian Meals',
+    title: "Sri Ganesha's Canteen Menu",
+    intro:
+      'Warm, freshly prepared vegetarian food served with devotion. Dine in after darshan, or call ahead for takeaway and catering.',
+    hoursTitle: 'Opening Hours',
+    categories: [
+      { name: 'Dosa Varieties', items: MENU_DOSA },
+      { name: 'Deals & Meals', items: MENU_DEALS },
+      { name: 'Uthapam Varieties', items: MENU_UTHAPAM },
+      { name: 'Vadai Varieties', items: MENU_VADAI },
+      { name: 'Other Main Dishes', items: MENU_MAINS },
+      { name: 'Drinks', items: MENU_DRINKS },
+      { name: 'Special Days Only', items: MENU_SPECIAL },
+      { name: 'Snacks & Desserts', items: MENU_SNACKS },
+    ],
+  },
   EVENTS: {
     eyebrow: 'Upcoming Events',
     title: 'Festivals & sacred observances',
@@ -469,6 +559,7 @@ const en: Content = {
     flashItems: [
       {
         slug: 'canteen-menu',
+        href: '#/canteen-menu',
         label: "Sri Ganesha's Canteen Menu",
         body: 'Warm, freshly prepared vegetarian meals are served daily at Sri Ganesha’s Canteen. From tiffin and dosai to full-plate lunches and evening prasadam, every dish is cooked with devotion. Browse the full menu and opening hours below.',
         ctaLabel: 'Go to Canteen',
@@ -622,6 +713,23 @@ const ta: Content = {
       { day: 'இரவு உணவு', time: '5:00 pm – 9:00 pm' },
     ],
   },
+  CANTEEN_MENU: {
+    eyebrow: 'பிரசாதம் & சைவ உணவுகள்',
+    title: 'ஸ்ரீ கணேஷா உணவக பட்டியல்',
+    intro:
+      'பக்தியுடன் வழங்கப்படும் சூடான, புத்தம்புதிதாகச் சமைத்த சைவ உணவு. தரிசனத்திற்குப் பிறகு உணவருந்தலாம், அல்லது பார்சல் மற்றும் கேட்டரிங்கிற்கு முன்கூட்டியே அழைக்கவும்.',
+    hoursTitle: 'திறக்கும் நேரம்',
+    categories: [
+      { name: 'தோசை வகைகள்', items: MENU_DOSA },
+      { name: 'உணவுத் தொகுப்புகள்', items: MENU_DEALS },
+      { name: 'ஊத்தப்பம் வகைகள்', items: MENU_UTHAPAM },
+      { name: 'வடை வகைகள்', items: MENU_VADAI },
+      { name: 'பிற முக்கிய உணவுகள்', items: MENU_MAINS },
+      { name: 'பானங்கள்', items: MENU_DRINKS },
+      { name: 'சிறப்பு நாட்களில் மட்டும்', items: MENU_SPECIAL },
+      { name: 'தின்பண்டங்கள் & இனிப்புகள்', items: MENU_SNACKS },
+    ],
+  },
   EVENTS: {
     eyebrow: 'வரவிருக்கும் நிகழ்வுகள்',
     title: 'திருவிழாக்களும் புனித வழிபாடுகளும்',
@@ -739,6 +847,7 @@ const ta: Content = {
     flashItems: [
       {
         slug: 'canteen-menu',
+        href: '#/canteen-menu',
         label: 'ஸ்ரீ கணேஷா உணவக பட்டியல்',
         body: 'ஸ்ரீ கணேஷா உணவகத்தில் தினமும் சூடான, புத்தம்புதிதாகச் சமைத்த சைவ உணவு வழங்கப்படுகிறது. டிஃபன், தோசை முதல் முழு மதிய உணவு மற்றும் மாலை பிரசாதம் வரை ஒவ்வொரு உணவும் பக்தியுடன் சமைக்கப்படுகிறது. முழு பட்டியலையும் திறக்கும் நேரத்தையும் கீழே காணுங்கள்.',
         ctaLabel: 'உணவகத்திற்குச் செல்ல',
