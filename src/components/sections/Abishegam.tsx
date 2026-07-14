@@ -37,9 +37,11 @@ export function Abishegam() {
             className="group flex items-center gap-3"
             aria-label={`${SITE.name} — home`}
           >
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-maroon-900 font-display text-xl text-gold-400">
-              ॐ
-            </span>
+            <img
+              src="/Client%20Website%20Logo.svg"
+              alt={`${SITE.name} logo`}
+              className="h-14 w-14 shrink-0 object-contain [filter:brightness(0)] sm:h-16 sm:w-16"
+            />
             <span className="leading-tight">
               <span className="block font-display text-[0.8rem] font-semibold text-maroon-900 sm:text-[0.95rem]">
                 Sri Vakrathunda Vinayagar
