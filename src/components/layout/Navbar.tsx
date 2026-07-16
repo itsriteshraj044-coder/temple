@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { HiBars3, HiXMark, HiChevronDown } from 'react-icons/hi2'
 import { SITE } from '@/data/content'
 import { scrollToHash } from '@/providers/SmoothScroll'
-import { navigate } from '@/lib/router'
+import { navigate, currentPath } from '@/lib/router'
 import { useContent, useLang } from '@/i18n/lang'
 
 export function Navbar({ solid = false }: { solid?: boolean }) {
@@ -32,8 +32,15 @@ export function Navbar({ solid = false }: { solid?: boolean }) {
 
   const go = (href: string) => {
     setOpen(false)
-    if (href.startsWith('#')) scrollToHash(href)
-    else navigate(href)
+    if (href.startsWith('#')) {
+      // In-page anchors only exist on the homepage. From a standalone page,
+      // go home first, then scroll to the target section once it has mounted.
+      if (currentPath() === '/') scrollToHash(href)
+      else {
+        navigate('/')
+        setTimeout(() => scrollToHash(href), 120)
+      }
+    } else navigate(href)
   }
 
   return (

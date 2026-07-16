@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { SmoothScroll } from '@/providers/SmoothScroll'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
 import { BackgroundMusic } from '@/components/ui/BackgroundMusic'
@@ -17,24 +17,21 @@ import { Donate } from '@/components/sections/Donate'
 import { Join } from '@/components/sections/Join'
 import { Gallery } from '@/components/sections/Gallery'
 import { Contact } from '@/components/sections/Contact'
-import { ECalendar } from '@/components/sections/ECalendar'
 import { FlashPage } from '@/components/sections/FlashPage'
-import { DailyPooja } from '@/components/sections/DailyPooja'
-import { CanteenMenu } from '@/components/sections/CanteenMenu'
-import { Abishegam } from '@/components/sections/Abishegam'
-import { Festivals } from '@/components/sections/Festivals'
-import { navigate, useRoute } from '@/lib/router'
+import { PAGES } from '@/pages/registry'
+import { navigate, usePathname } from '@/lib/router'
 import type Lenis from 'lenis'
 
 export default function App() {
-  const route = useRoute()
+  const path = usePathname()
+  const StandalonePageComponent = PAGES[path]
 
   // Reset to the top of the page whenever the route changes.
   useEffect(() => {
     const lenis = (window as Window & { __lenis?: Lenis }).__lenis
     if (lenis) lenis.scrollTo(0, { immediate: true })
     else window.scrollTo(0, 0)
-  }, [route])
+  }, [path])
 
   // Intercept clicks on internal route links (href="/…") so navigation happens
   // in-app via the History router instead of triggering a full page reload.
@@ -58,18 +55,12 @@ export default function App() {
     <SmoothScroll>
       <ScrollProgress />
       <BackgroundMusic />
-      {route === 'e-calendar' ? (
-        <ECalendar />
-      ) : route === 'daily-pooja' ? (
-        <DailyPooja />
-      ) : route === 'canteen-menu' ? (
-        <CanteenMenu />
-      ) : route === 'abishegam' ? (
-        <Abishegam />
-      ) : route === 'festivals' ? (
-        <Festivals />
-      ) : route === 'flash' ? (
+      {path.startsWith('/flash/') ? (
         <FlashPage />
+      ) : StandalonePageComponent ? (
+        <Suspense fallback={<div className="min-h-screen bg-cream-50" />}>
+          <StandalonePageComponent />
+        </Suspense>
       ) : (
         <>
           <Navbar />

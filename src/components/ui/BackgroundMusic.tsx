@@ -17,10 +17,21 @@ const SRC = '/audio/temple-music.mp3'
 const VOLUME = 0.05 // very soft, background level
 const DOOR_EASE = [0.76, 0, 0.24, 1] as const
 
+/**
+ * Module-scoped "already entered" flag. It lives for the lifetime of the loaded
+ * app, so it survives React remounts during in-app (SPA) navigation — the gate
+ * won't reappear when moving between pages. A full page load / refresh runs the
+ * module afresh and resets it to false, so the welcome gate shows once on first
+ * load and again on every refresh, exactly as intended.
+ */
+let hasEntered = false
+
 export function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const btnRef = useRef<HTMLButtonElement | null>(null)
-  const [entered, setEntered] = useState(false)
+  // Seed from the module flag so navigating between pages never re-shows the
+  // gate; a refresh resets the flag (fresh module) and the gate shows again.
+  const [entered, setEntered] = useState(hasEntered)
   const [playing, setPlaying] = useState(false)
   const { setLang } = useLang()
 
@@ -35,23 +46,39 @@ export function BackgroundMusic() {
     }
   }
 
-  // Warm the audio up muted so it can start instantly on Enter; lock scroll
-  // while the gate is up.
+  // Warm the audio up ONCE on mount. If the visitor already entered (e.g. this
+  // component remounted during navigation), resume audibly; otherwise warm up
+  // muted so it can start instantly on Enter. Runs on mount only so it never
+  // re-mutes the track after the visitor has entered.
   useEffect(() => {
     const audio = audioRef.current
-    if (audio) {
-      audio.volume = VOLUME
+    if (!audio) return
+    audio.volume = VOLUME
+    if (entered) {
+      audio.muted = false
+      audio
+        .play()
+        .then(() => setPlaying(true))
+        .catch(() => {})
+    } else {
       audio.muted = true
       audio.play().catch(() => {})
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Hold the page (and lock scroll) only while the welcome gate is up.
+  useEffect(() => {
+    if (entered) return
     lockScroll(true)
     return () => lockScroll(false)
-  }, [])
+  }, [entered])
 
   // Enter the site in the chosen language (defaults to the current one). The tap
   // is the user gesture browsers require before audible autoplay is allowed.
   const enter = (lang?: Lang) => {
     if (lang) setLang(lang)
+    hasEntered = true
     const audio = audioRef.current
     if (audio) {
       audio.muted = false

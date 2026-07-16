@@ -327,6 +327,30 @@
 }
 
 /* ----------------------------------------------------------------------------
+   Generic dish/word marquee used on standalone pages (e.g. the Canteen page).
+   The track holds two identical copies; translating by -50% loops seamlessly.
+   ------------------------------------------------------------------------- */
+.marquee-track {
+  animation: marquee-scroll 38s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
    Mid-width display type trim.
    A 1920px monitor at Windows 125% scaling presents a ~1536px display, where
    the editorial type felt oversized, so we trim the big headings and labels a

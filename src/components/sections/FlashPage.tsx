@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { useContent } from '@/i18n/lang'
-import { getFlashSlug, navigate, useRoute } from '@/lib/router'
+import { getFlashSlug, navigate, usePathname } from '@/lib/router'
 
 /**
  * Standalone page for a single Flash Story headline (route `#/flash/<slug>`).
@@ -13,11 +13,11 @@ import { getFlashSlug, navigate, useRoute } from '@/lib/router'
  */
 export function FlashPage() {
   const { UI } = useContent()
-  useRoute() // re-render when the hash (and thus the slug) changes
+  usePathname() // re-render when the path (and thus the slug) changes
   const slug = getFlashSlug()
   const item = UI.flashItems.find((f) => f.slug === slug) ?? UI.flashItems[0]
 
-  const goHome = () => navigate('home')
+  const goHome = () => navigate('/')
 
   return (
     <>
