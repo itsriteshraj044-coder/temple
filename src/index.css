@@ -1,49 +1,16 @@
 @import 'tailwindcss';
 
 /* ============================================================================
-   Web fonts — self-hosted Noto Sans (used site-wide).
+   Web fonts — self-hosted Universal Sans Display (used site-wide).
+   Only a single weight cut is available, so one @font-face covers the whole
+   100–900 range and the browser synthesises heavier/lighter weights.
    ========================================================================== */
 @font-face {
-  font-family: 'Noto Sans';
+  font-family: 'Universal Sans';
   font-style: normal;
-  font-weight: 300;
+  font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/noto-sans-300.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/noto-sans-400.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('/fonts/noto-sans-500.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/fonts/noto-sans-600.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/noto-sans-700.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('/fonts/noto-sans-800.woff2') format('woff2');
+  src: url('/fonts/universal-sans-display-450.ttf') format('truetype');
 }
 
 /* ============================================================================
@@ -92,10 +59,10 @@
   --breakpoint-4xl: 2560px;
   --breakpoint-5xl: 3840px;
 
-  /* Noto Sans site-wide — headings, titles, and body text all use it. */
-  --font-display: 'Noto Sans', -apple-system, system-ui, sans-serif;
-  --font-serif: 'Noto Sans', -apple-system, system-ui, sans-serif;
-  --font-sans: 'Noto Sans', -apple-system, system-ui, sans-serif;
+  /* Universal Sans site-wide — headings, titles, and body text all use it. */
+  --font-display: 'Universal Sans', -apple-system, system-ui, sans-serif;
+  --font-serif: 'Universal Sans', -apple-system, system-ui, sans-serif;
+  --font-sans: 'Universal Sans', -apple-system, system-ui, sans-serif;
 
   --ease-temple: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -137,9 +104,9 @@
     background-color: var(--color-cream-50);
     color: var(--color-ink-900);
     font-family: var(--font-sans);
-    /* Noto Sans ships no italic cut in these files, so allow synthetic obliquing
-       for the few italic accents; real weights mean faux-bold stays off. */
-    font-synthesis: style;
+    /* Universal Sans ships a single weight/style cut here, so allow the browser
+       to synthesise both bolder weights and italic accents. */
+    font-synthesis: weight style;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
